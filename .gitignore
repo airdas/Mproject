@@ -1,9 +1,9 @@
 #ignore everything except .tex, .bib & .pdf
-Latex_documents/*.log
-Latex_documents/*.aux
-Latex_documents/*.bbl
-Latex_documents/*.out
-Latex_documents/*.blg
-Latex_documents/*.bcf
-Latex_documents/*.xml
-Latex_documents/*.bak
+Latex_docs/*.log
+Latex_docs/*.aux
+Latex_docs/*.bbl
+Latex_docs/*.out
+Latex_docs/*.blg
+Latex_docs/*.bcf
+Latex_docs/*.xml
+Latex_docs/*.bak
