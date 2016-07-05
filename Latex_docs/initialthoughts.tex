@@ -21,7 +21,8 @@
 \providecommand{\neus}{$n_{e~us}$} % upstream electron density shortcut
 \providecommand{\netarget}{$n_{e~target}$} % target electron density shortcut
 \providecommand{\netg}{$n_{e~tg}$} % target electron density shortcut
-
+\providecommand{\Tus}{$T_{tg}$} % Upstream temperature shortcut
+\providecommand{\Ttg}{$T_{tg}$} % Target temperature shortcut
 
 %\usepackage[left = 15mm, top = 15mm]{geometry} %margins
 \usepackage{amssymb} % Allows use of \therefore command to get the three dots in a triangle symbol
@@ -83,10 +84,7 @@ Brief overview of the importance of detachment for ITER and future tokamaks.
 \section{Experimental Design}\label{sec:Expt}
 SOL1D was installed on the remote server and some test simulations run to achieve a basic understanding of the set-up and outputs. The first aim was to ascertain an acceptable grid resolution to use, as a compromise is required concerning accuracy of results and time taken to run a simulation. SOL1D performs 1-dimensional simulations and the y-axis was chosen as the simulation axis. 
 
-
-
-
-Following SOL1D simulations, 2D simulations followed, with the initial goal being to compare results to the 1D case.
+Following SOL1D simulations, 2D simulations follow, with the initial goal being to compare results to the 1D case.
 
 
 \section{Results and Analysis}\label{sec:Results}
@@ -98,15 +96,15 @@ After a number of time-steps of SOL1D simulation it will usually settle down and
 \caption{The variation of \neus with simulation time step. \textbf{should maybe put the oscillations from other resolutions on the same figure to make it more interesting?}}\label{fig:ne_var_ny=800}
 \end{figure}
 
-An important first step when running grid simulations is to ascertain an acceptable resolution to use. Figure~\ref{fig:RichExtrp_neres} shows the approximate steady-state value of \netarget for different resolutions. The choice of resolution has to take into account the accuracy of the output and the time taken to receive said output. It is clear that \netg is tending towards a value at infinite resolution. There is a 5.0\% change from 200 to 400 cells, 1.6\% change from 400 to 600 and 0.58\% change from 600 to 800 cells.
+An important first step when running grid simulations is to ascertain an acceptable resolution to use. Figure~\ref{fig:RichExtrp_neres} shows the approximate steady-state value of \netarget for different resolutions. The choice of resolution has to take into account the accuracy of the output and the time taken to receive said output. It is clear that \netg is tending towards a value at infinite resolution. There is a 5.0\% change from 200 to 400 cells, 1.6\% change from 400 to 600 and 0.58\% change from 600 to 800 cells. Given that the number of operations performed by the code scales as approximately $N^2$ for $N$ cells, increasing the cell number heavily increases the computing cost. Table~\ref{tab:sol1dres} contains run times at different resolutions, and shows a stark increase in time for increasing resolution. The second run, at \neus $= 1.25\e{19}$ cm$^{-3}$, completed significantly faster than the first run because it was restarted from the near steady-state snapshot at the end of the first run. Therefore, each simulation time step is completed faster because the system is already rather stable, and only needs to accommodate an injection of an extra $0.25\e{19}$ cm$^{-3}$ of material in from the upstream.
 
 \begin{table}[]
 %\centering
 \caption{SOL1D simulation run times with different resolutions.}
 \label{tab:sol1dres}
-\begin{tabular}{llll}
+\begin{tabular}{l|l|l|l}
 \multicolumn{1}{l|}{\multirow{2}{*}{}} & \multicolumn{3}{l}{Time taken to complete 1000 time steps}    \\ \cline{2-4} 
- \multicolumn{1}{l|}{Resolution}        & \multicolumn{1}{l|}{Density: $1.0\e{19}$ cm$^{-3}$} & \multicolumn{1}{l|}{$1.25\e{19}$ cm$^{-3}$}  &  \\ \hline
+ \multicolumn{1}{l|}{Resolution}        & \multicolumn{1}{l|}{\neus: $1.0\e{19}$ cm$^{-3}$} & \multicolumn{1}{l|}{$1.25\e{19}$ cm$^{-3}$}  &  \\ \hline
                    200                 &      47m 44s          &    24m 23s         &  \\
                    400                 &      1h 48m 55s       &    2h 45m 4s       &  \\
                    600                 &      7h 40m 57s       &    5h 5m 4s        &  \\
@@ -114,24 +112,20 @@ An important first step when running grid simulations is to ascertain an accepta
 \end{tabular}
 \end{table}
 
-
-
-
-
 \begin{figure}
 \includegraphics[scale=0.4]{Figures/sol1d/RichExtrp_neres.PNG}
 \centering
 \caption{Density at sheath, \netg, at approximately steady-state for different y-axis resolutions in SOL1D.}\label{fig:RichExtrp_neres}
 \end{figure}
 
+Two key parameters to be analysed are the upstream and target temperatures, \Tus and \Ttg. The whole point of divertor detachment is to reduce the power flux impacting on the divertor. \Ttg sets the voltage across the sheath, which in turn influences the velocity of ions impacting on the solid divertor target (ions in the simulation have a fixed velocity when entering the sheath - the Bohm velocity). The lower \Ttg, the less damage will be done to the divertor plates. Figure~\ref{fig:TT_IMPCOMBO2} shows the difference between \Tus and \Ttg for different \neus values at each of the resolutions in table~\ref{tab:sol1dres}. When looking to reduce \Ttg, the trade off is the corresponding fall in \Tus. As the upstream is at the SOL midplane, any changes there will be translated directly into the main plasma. 
 
-
-See figure~\ref{fig:TT_IMPCOMBO} for a nice graph.
+Similarly shaped temperature profiles are observed for all resolutions in figure~\ref{fig:TT_IMPCOMBO2}, \Tus falls slowly while \Ttg falls rapidly with increasing \neus, until above $2.25\e{19}$ cm$^{-3}$ when it starts to fall extremely fast. At this point, the density profile has pulled away from the divertor and this extra density flooding into the upstream is reducing the temperature there. If an operational 'sweet-spot' exists, then it is in the range $2\e{19}$ cm$^{-3}$ < \neus < $2.25\e{19}$ cm$^{-3}$, as here \Ttg has practically reached it's lower limit while \Tus is still quite high.
 
 \begin{figure}
-\includegraphics[scale=0.4]{Figures/sol1d/TT_IMPCOMBO.PNG}
+\includegraphics[scale=0.5]{Figures/sol1d/TT_IMPCOMBO2.PNG}
 \centering
-\caption{Comparison of $T_{upstream}$ and $T_{target}$ at varying set $n_{e~upstream}$ for different y-axis resolutions in SOL1D}\label{fig:TT_IMPCOMBO}
+\caption{Comparison of $T_{upstream}$ and $T_{target}$ at varying set $n_{e~upstream}$ for different y-axis resolutions in SOL1D}\label{fig:TT_IMPCOMBO2}
 \end{figure}
 
 \section{Conclusion}\label{sec:Conclusion}
