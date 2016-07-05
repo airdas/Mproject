@@ -17,6 +17,9 @@
 
 \providecommand{\e}[1]{\ensuremath{\times 10^{#1}}} %for scientific notation
 \providecommand{\squiggle}{\raise.17ex\hbox{$\scriptstyle\sim$}} %for tilde character
+\providecommand{\neus}{$n_{e~upstream}$} % upstream electron density shortcut
+
+
 %\usepackage[left = 15mm, top = 15mm]{geometry} %margins
 \usepackage{amssymb} % Allows use of \therefore command to get the three dots in a triangle symbol
 
@@ -74,21 +77,30 @@ Brief overview of the importance of detachment for ITER and future tokamaks.
 \section{Experimental Design}\label{sec:Expt}
 SOL1D was installed on the remote server and some test simulations run to achieve a basic understanding of the set-up and outputs. The first aim was to ascertain an acceptable grid resolution to use, as a compromise is required concerning accuracy of results and time taken to run a simulation. SOL1D performs 1-dimensional simulations and the y-axis was chosen as the simulation axis. 
 
-See figure~\ref{fig:TT_IMPCOMBO} for a nice graph.
 
-\begin{figure}
-\includegraphics[scale=0.4]{Figures/TT_IMPCOMBO.PNG}
-\centering
-\caption{Comparison of $T_{upstream}$ and $T_{target}$ at varying set $n_{e~upstream}$ for different y-axis resolutions in SOL1D}\label{fig:TT_IMPCOMBO}
-\end{figure}
 
 
 Following SOL1D simulations, 2D simulations followed, with the initial goal being to compare results to the 1D case.
 
 
 \section{Results and Analysis}\label{sec:Results}
+After a number of time-steps of SOL1D simulation it will usually settle down and get close to a steady-state solution. This can be seen in figure~\ref{fig:ne_var_ny=800} - the variable's, \neus, oscillations are damped to a very small amplitude as the simulation progresses and it approaches steady-state.
+
+\begin{figure}
+\includegraphics[scale=0.4]{Figures/sol1d/ne_var_ny=800.PNG}
+\centering
+\caption{The variation of \neus with simulation time step. \textbf{should maybe put the oscillations from other resolutions on the same figure to make it more interesting?}}\label{fig:ne_var_ny=800}
+\end{figure}
 
 
+
+See figure~\ref{fig:TT_IMPCOMBO} for a nice graph.
+
+\begin{figure}
+\includegraphics[scale=0.4]{Figures/sol1d/TT_IMPCOMBO.PNG}
+\centering
+\caption{Comparison of $T_{upstream}$ and $T_{target}$ at varying set $n_{e~upstream}$ for different y-axis resolutions in SOL1D}\label{fig:TT_IMPCOMBO}
+\end{figure}
 
 \section{Conclusion}\label{sec:Conclusion}
 

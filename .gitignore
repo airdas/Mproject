@@ -7,3 +7,5 @@ Latex_docs/*.blg
 Latex_docs/*.bcf
 Latex_docs/*.xml
 Latex_docs/*.bak
+Latex_docs/*.synctex.gz
+
