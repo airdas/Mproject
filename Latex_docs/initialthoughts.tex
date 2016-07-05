@@ -17,7 +17,10 @@
 
 \providecommand{\e}[1]{\ensuremath{\times 10^{#1}}} %for scientific notation
 \providecommand{\squiggle}{\raise.17ex\hbox{$\scriptstyle\sim$}} %for tilde character
-\providecommand{\neus}{$n_{e~upstream}$} % upstream electron density shortcut
+\providecommand{\neupstream}{$n_{e~upstream}$} % upstream electron density shortcut
+\providecommand{\neus}{$n_{e~us}$} % upstream electron density shortcut
+\providecommand{\netarget}{$n_{e~target}$} % target electron density shortcut
+\providecommand{\netg}{$n_{e~tg}$} % target electron density shortcut
 
 
 %\usepackage[left = 15mm, top = 15mm]{geometry} %margins
@@ -46,6 +49,9 @@
 \usepackage[toc,page]{appendix}
 %euro symbol (\EUR i think)
 \usepackage{eurosym}
+
+% for multirow command in table generation
+\usepackage{multirow}
 
 % Document
 \begin{document}
@@ -84,12 +90,38 @@ Following SOL1D simulations, 2D simulations followed, with the initial goal bein
 
 
 \section{Results and Analysis}\label{sec:Results}
-After a number of time-steps of SOL1D simulation it will usually settle down and get close to a steady-state solution. This can be seen in figure~\ref{fig:ne_var_ny=800} - the variable's, \neus, oscillations are damped to a very small amplitude as the simulation progresses and it approaches steady-state.
+After a number of time-steps of SOL1D simulation it will usually settle down and get close to a steady-state solution. This can be seen in figure~\ref{fig:ne_var_ny=800} - the variable's, \neupstream, oscillations are damped to a very small amplitude as the simulation progresses and it approaches steady-state, which took about 24 hours to reach its current point. Perhaps the simulation could have been stopped earlier, however this would increase the uncertainty in all the output data. Simulations with lower resolution do not reach a steady state in fewer time points, but they are faster to run so they reach it quicker in real time.
 
 \begin{figure}
 \includegraphics[scale=0.4]{Figures/sol1d/ne_var_ny=800.PNG}
 \centering
 \caption{The variation of \neus with simulation time step. \textbf{should maybe put the oscillations from other resolutions on the same figure to make it more interesting?}}\label{fig:ne_var_ny=800}
+\end{figure}
+
+An important first step when running grid simulations is to ascertain an acceptable resolution to use. Figure~\ref{fig:RichExtrp_neres} shows the approximate steady-state value of \netarget for different resolutions. The choice of resolution has to take into account the accuracy of the output and the time taken to receive said output. It is clear that \netg is tending towards a value at infinite resolution. There is a 5.0\% change from 200 to 400 cells, 1.6\% change from 400 to 600 and 0.58\% change from 600 to 800 cells.
+
+\begin{table}[]
+%\centering
+\caption{SOL1D simulation run times with different resolutions.}
+\label{tab:sol1dres}
+\begin{tabular}{llll}
+\multicolumn{1}{l|}{\multirow{2}{*}{}} & \multicolumn{3}{l}{Time taken to complete 1000 time steps}    \\ \cline{2-4} 
+ \multicolumn{1}{l|}{Resolution}        & \multicolumn{1}{l|}{Density: $1.0\e{19}$ cm$^{-3}$} & \multicolumn{1}{l|}{$1.25\e{19}$ cm$^{-3}$}  &  \\ \hline
+                   200                 &      47m 44s          &    24m 23s         &  \\
+                   400                 &      1h 48m 55s       &    2h 45m 4s       &  \\
+                   600                 &      7h 40m 57s       &    5h 5m 4s        &  \\
+                   800                 &      13h 18m 55s      &    7h 1m 28s       &  
+\end{tabular}
+\end{table}
+
+
+
+
+
+\begin{figure}
+\includegraphics[scale=0.4]{Figures/sol1d/RichExtrp_neres.PNG}
+\centering
+\caption{Density at sheath, \netg, at approximately steady-state for different y-axis resolutions in SOL1D.}\label{fig:RichExtrp_neres}
 \end{figure}
 
 
