@@ -130,6 +130,7 @@ Similarly shaped temperature profiles are observed for all resolutions in figure
 \caption{Comparison of $T_{upstream}$ and $T_{target}$ at varying set $n_{e~upstream}$ for different y-axis resolutions in SOL1D}\label{fig:TT_IMPCOMBO2}
 \end{figure}
 
+Simulations from \noNe{3} onwards shown in figure~\ref{fig:TT_IMPCOMBO2} are detaching and reattaching in quick succession, so they are unlikely to approach a steady state within a reasonable number of timesteps. When detached, the upstream temperatures in these simulations follow the downward trend observed with increasing \neus. However, when the system destabilises and rushes to reattach to the target plates, the upstream temperature shoots up. If these higher density simulations are terminated during a period of detachment, \Tus will be low, as is the case for all the \noNe{3.75} runs. Conversely, if they are terminated when the density profile has reattached, \Tus will be much higher, which can be seen in the data points at \noNe{3.5} for ny = 400 \& 600 cells. This cyclical detachment and reattachment is portrayed in figure~\ref{fig:ny400r35netg} - here \netg is observed following a pattern of peaks (when system is attached to the target) and troughs (when the system is detached).
 
 \begin{figure}
 \includegraphics[scale=0.5]{Figures/sol1d/ny400r35netg.png}
