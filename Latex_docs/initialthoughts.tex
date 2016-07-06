@@ -18,7 +18,7 @@
 \providecommand{\e}[1]{\ensuremath{\times 10^{#1}}} %for scientific notation
 \providecommand{\squiggle}{\raise.17ex\hbox{$\scriptstyle\sim$}} %for tilde character
 
-\providecommand{\noNe}[1]{\ensuremath{${#1}\e{19}$ cm$^{-3}$}} % for writing density as a number followed by cm^-3
+\providecommand{\noNe}[1]{{${#1}\times 10^{19}$ cm$^{-3}$}} % for writing density as a number followed by cm^-3
 
 \providecommand{\neupstream}{$n_{e~upstream}$} % upstream electron density shortcut
 \providecommand{\neus}{$n_{e~us}$} % upstream electron density shortcut
@@ -88,13 +88,12 @@ Brief overview of the importance of detachment for ITER and future tokamaks.
 SOL1D was installed on the remote server and some test simulations run to achieve a basic understanding of the set-up and outputs. The first aim was to ascertain an acceptable grid resolution to use, as a compromise is required concerning accuracy of results and time taken to run a simulation. SOL1D performs 1-dimensional simulations and the y-axis was chosen as the simulation axis. 
 
 Following SOL1D simulations, 2D simulations follow, with the initial goal being to compare results to the 1D case.
-\times 10^{19}
 
 \section{Results and Analysis}\label{sec:Results}
 After a number of time-steps of SOL1D simulation it will usually settle down and get close to a steady-state solution. This can be seen in figure~\ref{fig:ne_var_ny=800} - the variable's, \neupstream, oscillations are damped to a very small amplitude as the simulation progresses and it approaches steady-state, which took about 24 hours to reach its current point. Perhaps the simulation could have been stopped earlier, however this would increase the uncertainty in all the output data. Simulations with lower resolution do not reach a steady state in fewer time points, but they are faster to run so they reach it quicker in real time.
 
 \begin{figure}
-\includegraphics[scale=0.4]{Figures/sol1d/ne_var_ny=800.PNG}
+\includegraphics[scale=0.4]{Figures/sol1d/ne_var_ny=800.png}
 \centering
 \caption{The variation of \neus with simulation time step. \textbf{should maybe put the oscillations from other resolutions on the same figure to make it more interesting?}}\label{fig:ne_var_ny=800}
 \end{figure}
@@ -116,7 +115,7 @@ An important first step when running grid simulations is to ascertain an accepta
 \end{table}
 
 \begin{figure}
-\includegraphics[scale=0.4]{Figures/sol1d/RichExtrp_neres.PNG}
+\includegraphics[scale=0.4]{Figures/sol1d/RichExtrp_neres.png}
 \centering
 \caption{Density at sheath, \netg, at approximately steady-state for different y-axis resolutions in SOL1D.}\label{fig:RichExtrp_neres}
 \end{figure}
@@ -126,16 +125,16 @@ Two key parameters to be analysed are the upstream and target temperatures, \Tus
 Similarly shaped temperature profiles are observed for all resolutions in figure~\ref{fig:TT_IMPCOMBO2}, \Tus falls slowly while \Ttg falls rapidly with increasing \neus, until above $2.25\e{19}$ cm$^{-3}$ when it starts to fall extremely fast. At this point, the density profile has pulled away from the divertor and this extra density flooding into the upstream is reducing the temperature there. If an operational 'sweet-spot' exists, then it is in the range $2\e{19}$ cm$^{-3}$ < \neus < $2.25\e{19}$ cm$^{-3}$, as here \Ttg has practically reached it's lower limit while \Tus is still quite high.
 
 \begin{figure}
-\includegraphics[scale=0.5]{Figures/sol1d/TT_IMPCOMBO2.PNG}
+\includegraphics[scale=0.5]{Figures/sol1d/TT_IMPCOMBO2.png}
 \centering
 \caption{Comparison of $T_{upstream}$ and $T_{target}$ at varying set $n_{e~upstream}$ for different y-axis resolutions in SOL1D}\label{fig:TT_IMPCOMBO2}
 \end{figure}
 
 
 \begin{figure}
-\includegraphics[scale=0.5]{Figures/sol1d/ny400r35netg.PNG}
+\includegraphics[scale=0.5]{Figures/sol1d/ny400r35netg.png}
 \centering
-\caption{Continual detachment and reattachment causes this target $n_e$ variation for ny = 400 cells run with \neus set to \noNe{3.5}.}\label{fig:ny400r35netg}
+\caption{Continual detachment and reattachment causes this target $n_e$ variation for ny = 400 cells run with \neus~set to \noNe{3.5}.}\label{fig:ny400r35netg}
 \end{figure}
 
 
