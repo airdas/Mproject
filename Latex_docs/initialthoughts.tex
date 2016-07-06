@@ -90,6 +90,7 @@ SOL1D was installed on the remote server and some test simulations run to achiev
 Following SOL1D simulations, 2D simulations follow, with the initial goal being to compare results to the 1D case.
 
 \section{Results and Analysis}\label{sec:Results}
+\subsection{SOL1D}\label{ssec:SOL1D}
 After a number of time-steps of SOL1D simulation it will usually settle down and get close to a steady-state solution. This can be seen in figure~\ref{fig:ne_var_ny=800} - the variable's, \neupstream, oscillations are damped to a very small amplitude as the simulation progresses and it approaches steady-state, which took about 24 hours to reach its current point. Perhaps the simulation could have been stopped earlier, however this would increase the uncertainty in all the output data. Simulations with lower resolution do not reach a steady state in fewer time points, but they are faster to run so they reach it quicker in real time.
 
 \begin{figure}
@@ -120,6 +121,7 @@ An important first step when running grid simulations is to ascertain an accepta
 \caption{Density at sheath, \netg, at approximately steady-state for different y-axis resolutions in SOL1D.}\label{fig:RichExtrp_neres}
 \end{figure}
 
+\subsubsection{Temperature comparison}\label{sssec:tempcomp}
 Two key parameters to be analysed are the upstream and target temperatures, \Tus and \Ttg. The whole point of divertor detachment is to reduce the power flux impacting on the divertor. \Ttg sets the voltage across the sheath, which in turn influences the velocity of ions impacting on the solid divertor target (ions in the simulation have a fixed velocity when entering the sheath - the Bohm velocity). The lower \Ttg, the less damage will be done to the divertor plates. Figure~\ref{fig:TT_IMPCOMBO2} shows the difference between \Tus and \Ttg for different \neus values at each of the resolutions in table~\ref{tab:sol1dres}. When looking to reduce \Ttg, the trade off is the corresponding fall in \Tus. As the upstream is at the SOL midplane, any changes there will be translated directly into the main plasma. 
 
 Similarly shaped temperature profiles are observed for all resolutions in figure~\ref{fig:TT_IMPCOMBO2}, \Tus falls slowly while \Ttg falls rapidly with increasing \neus, until above $2.25\e{19}$ cm$^{-3}$ when it starts to fall extremely fast. At this point, the density profile has pulled away from the divertor and this extra density flooding into the upstream is reducing the temperature there. If an operational 'sweet-spot' exists, then it is in the range $2\e{19}$ cm$^{-3}$ < \neus < $2.25\e{19}$ cm$^{-3}$, as here \Ttg has practically reached it's lower limit while \Tus is still quite high.
@@ -130,13 +132,17 @@ Similarly shaped temperature profiles are observed for all resolutions in figure
 \caption{Comparison of $T_{upstream}$ and $T_{target}$ at varying set $n_{e~upstream}$ for different y-axis resolutions in SOL1D}\label{fig:TT_IMPCOMBO2}
 \end{figure}
 
-Simulations from \noNe{3} onwards shown in figure~\ref{fig:TT_IMPCOMBO2} are detaching and reattaching in quick succession, so they are unlikely to approach a steady state within a reasonable number of timesteps. When detached, the upstream temperatures in these simulations follow the downward trend observed with increasing \neus. However, when the system destabilises and rushes to reattach to the target plates, the upstream temperature shoots up. If these higher density simulations are terminated during a period of detachment, \Tus will be low, as is the case for all the \noNe{3.75} runs. Conversely, if they are terminated when the density profile has reattached, \Tus will be much higher, which can be seen in the data points at \noNe{3.5} for ny = 400 \& 600 cells. This cyclical detachment and reattachment is portrayed in figure~\ref{fig:ny400r35netg} - here \netg is observed following a pattern of peaks (when system is attached to the target) and troughs (when the system is detached).
+Simulations from \noNe{3} onwards shown in figure~\ref{fig:TT_IMPCOMBO2} are detaching and reattaching in quick succession, so they are unlikely to approach a steady state within a reasonable number of timesteps. When detached, the upstream temperatures in these simulations follow the downward trend observed with increasing \neus. However, when the system destabilises and rushes to reattach to the target plates, the upstream temperature shoots up. If these higher density simulations are terminated during a period of detachment, \Tus will be low, as is the case for all the \noNe{3.75} runs. Conversely, if they are terminated when the density profile has reattached, \Tus will be much higher, which can be seen in the data points at \noNe{3.5} for ny = 400 \& 600 cells. This cyclical detachment and reattachment is portrayed in figure~\ref{fig:ny400800r35netg} - here \netg is observed following a pattern of peaks (when system is attached to the target) and troughs (when the system is detached). In the case of the black line, with y-axis resolution of 400 cells, the simulation has completed when the sheath density is still far higher than its minimum value, so the density profile is still in the process of detaching from the target surface. Consequently, the upstream temperature is still relatively quite high. The red line is from a simulation with the same input values but using 800 cells along the y-axis, here termination has occurred when the density profile is almost fully detached from the target, hence the upstream temperature is quite low. This termination snapshot effect can be seen in figure~\ref{fig:TT_IMPCOMBO2} at \noNe{3.5}, where the upstream temperature with 400 cells is much higher than that for 800 cells.
 
 \begin{figure}
-\includegraphics[scale=0.5]{Figures/sol1d/ny400r35netg.png}
+\includegraphics[scale=0.5]{Figures/sol1d/ny400800r35netg.png}
 \centering
-\caption{Continual detachment and reattachment causes this target $n_e$ variation for ny = 400 cells run with \neus~set to \noNe{3.5}.}\label{fig:ny400r35netg}
+\caption{Continual detachment and reattachment causes the target $n_e$ variations for ny = 400 and 800 cells run with \neus~set to \noNe{3.5}.}\label{fig:ny400800r35netg}
 \end{figure}
+
+
+\subsubsection{Pressure Loss}\label{sssec:Ploss}
+
 
 
 \section{Conclusion}\label{sec:Conclusion}
