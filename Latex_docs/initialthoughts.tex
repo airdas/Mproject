@@ -80,8 +80,12 @@
 \section{Background}\label{sec:Bg}
 Brief overview of the importance of detachment for ITER and future tokamaks.
 - Current material limit
+
 - Divertor geometries (conventional, super-X, snowflake)
+
 - 
+
+- Pressure loss (1997Pitcher review of Experimental Divertor physics - p 45)
 
 
 \section{Experimental Design}\label{sec:Expt}
@@ -121,6 +125,14 @@ An important first step when running grid simulations is to ascertain an accepta
 \caption{Density at sheath, \netg, at approximately steady-state for different y-axis resolutions in SOL1D.}\label{fig:RichExtrp_neres}
 \end{figure}
 
+
+\begin{figure}
+\includegraphics[scale=0.4]{Figures/sol1d/neprofneusALL.png}
+\centering
+\caption{Density profile close to target for y-axis resolutions 200, 400, 600 \& 800 cells at different set values of \neus in SOL1D.}\label{fig:neprofneusALL}
+\end{figure}
+
+
 \subsubsection{Temperature comparison}\label{sssec:tempcomp}
 Two key parameters to be analysed are the upstream and target temperatures, \Tus and \Ttg. The whole point of divertor detachment is to reduce the power flux impacting on the divertor. \Ttg sets the voltage across the sheath, which in turn influences the velocity of ions impacting on the solid divertor target (ions in the simulation have a fixed velocity when entering the sheath - the Bohm velocity). The lower \Ttg, the less damage will be done to the divertor plates. Figure~\ref{fig:TT_IMPCOMBO2} shows the difference between \Tus and \Ttg for different \neus values at each of the resolutions in table~\ref{tab:sol1dres}. When looking to reduce \Ttg, the trade off is the corresponding fall in \Tus. As the upstream is at the SOL midplane, any changes there will be translated directly into the main plasma. 
 
@@ -142,17 +154,18 @@ Simulations from \noNe{3} onwards shown in figure~\ref{fig:TT_IMPCOMBO2} are det
 
 
 \subsubsection{Pressure Loss}\label{sssec:Ploss}
+Pressure ratio $2\frac{P_{tg}}{P_{us}}$ was calculated for the density scan data with different resolutions and plotted against target plate temperature in figure~\ref{fig:PL_IMPCOMBO2logy}; the data from varied resolutions show good agreement. Experimentally, pressure loss ratio saturates to unity at high target temperatures due to the relation between static and viscous (?) pressure (maths is on p18 of lab book) and falls as \Ttg decreases after the system has started to detach. Experimental pressure loss data is displayed in figure~\ref{fig:PlossAlcator}. The sharp drop in pressure loss ratio below 3 eV is thought to be caused by atomic effects which become relevant at those lower temperatures \cite{Pitcher1997}.
 
-Experimentally, pressure loss ratio saturates at high target temperatures due to the relation between static and viscous (?) pressure (maths is on p18 of lab book) and falls sharply as 
+Pressure loss saturation is not observed in the simulations shown in figure~\ref{fig:PL_IMPCOMBO2logy}, and this discrepancy is expected to be due to the way ion viscosity is handled in the system. Ion viscosity varies like $\eta_i \propto \tau_i T \propto T^(\frac{5}{2}$, where $\tau_i$ is the ion collision time, hence this term in the overall viscosity equation is likely to blow up at higher temperatures, which would lead to the lack of saturation seen here. 
 
 \begin{figure}
-\includegraphics[scale=0.5]{Figures/sol1d/PL_IMPCOMBO2.png}
+\includegraphics[scale=0.5]{Figures/sol1d/PL_IMPCOMBO2logy.png}
 \centering
-\caption{Pressure loss ratio, $\frac{2P_{tg}}{P_{us}}$, change with \Ttg at different y-axis resolutions in SOL1D.}\label{fig:PL_IMPCOMBO2}
+\caption{Pressure loss ratio, $\frac{2P_{tg}}{P_{us}}$, change with \Ttg at different y-axis resolutions in SOL1D.}\label{fig:PL_IMPCOMBO2logy}
 \end{figure}
 
 \begin{figure}
-\includegraphics[scale=1]{Figures/PlossAlcator.png}
+\includegraphics[scale=0.7]{Figures/PlossAlcator.png}
 \centering
 \caption{Pressure loss ratio, $\frac{2P_{tg}}{P_{us}}$, data from Alcator C-Mod \cite{Lipschultz2007}.}\label{fig:PlossAlcator}
 \end{figure}
