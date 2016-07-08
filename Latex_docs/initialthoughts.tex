@@ -15,11 +15,11 @@
 %\marginsize{left}{right}{top}{bottom}
 %\usepackage[left = 15mm, top = 15mm]{geometry} %margins
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% COMMANDS %%%%%%%%%%%%%%%%%%%%%%%%%%
 \providecommand{\e}[1]{\ensuremath{\times 10^{#1}}} %for scientific notation
 \providecommand{\squiggle}{\raise.17ex\hbox{$\scriptstyle\sim$}} %for tilde character
-
 \providecommand{\noNe}[1]{{${#1}\times 10^{19}$ cm$^{-3}$}} % for writing density as a number followed by cm^-3
-
 \providecommand{\neupstream}{$n_{e~upstream}$} % upstream electron density shortcut
 \providecommand{\neus}{$n_{e~us}$} % upstream electron density shortcut
 \providecommand{\netarget}{$n_{e~target}$} % target electron density shortcut
@@ -200,7 +200,7 @@ Until now, the SOL1D simulations performed have used an arbitrary geometry and p
 \caption{A comparison of the Super-X Divertor (SXD) and the Conventional Divertor (CD) geometries on MAST \cite{Havlickova2014}.}\label{fig:CDvsSXD}
 \end{figure}
 
-Implementing this new geometry requires estimating how the magnetic field changes over the length of the field line. This is entered into the simulations by changing the 'Area Expansion Factor', which describes how the cross section of a flux tube changes as it traverses the length of the field line.
+Implementing this new geometry requires estimating how the magnetic field changes over the length of the field line. This is entered into the simulations by changing the Area Expansion Ratio (AER), which describes how the cross section of a flux tube changes as it traverses the length of the field line. A distance of $0.05$ m out from the separatrix into the SOL was used, thus by using the third panel in figure~\ref{fig:MASTUdesignpapersFig2} the AER is estimated to be 12. Furthermore, the connection length of the field line between the X-point and the target is estimated as $26$ m, from the second panel. The connection length between the outboard midplane and the X-point is $5$ m \cite{Fishpool2013}, making the total length of the simulation y-axis $31$ m.
 
 \begin{figure}
 \includegraphics[scale=0.55]{Figures/MASTUdesignpapersFig2.png}
