@@ -103,7 +103,7 @@ After a number of time-steps of SOL1D simulation it will usually settle down and
 \caption{The variation of \neus with simulation time step. \textbf{should maybe put the oscillations from other resolutions on the same figure to make it more interesting?}}\label{fig:ne_var_ny=800}
 \end{figure}
 
-An important first step when running grid simulations is to ascertain an acceptable resolution to use. Figure~\ref{fig:RichExtrp_neres} shows the approximate steady-state value of \netarget for different resolutions. The choice of resolution has to take into account the accuracy of the output and the time taken to receive said output. It is clear that \netg is tending towards a value at infinite resolution. There is a 5.0\% change from 200 to 400 cells, 1.6\% change from 400 to 600 and 0.58\% change from 600 to 800 cells. Given that the number of operations performed by the code scales as approximately $N^2$ for $N$ cells, increasing the cell number heavily increases the computing cost. Table~\ref{tab:sol1dres} contains run times at different resolutions, and shows a stark increase in time for increasing resolution. The second run, at \neus $= 1.25\e{19}$ cm$^{-3}$, completed significantly faster than the first run because it was restarted from the near steady-state snapshot at the end of the first run. Therefore, each simulation time step is completed faster because the system is already rather stable, and only needs to accommodate an injection of an extra $0.25\e{19}$ cm$^{-3}$ of material in from the upstream.
+An important first step when running grid simulations is to ascertain an acceptable resolution to use. Figure~\ref{fig:RE_neres1000} shows the approximate steady-state value of \netarget for different resolutions. The choice of resolution has to take into account the accuracy of the output and the time taken to receive said output. It is clear that \netg is tending towards a value at infinite resolution. There is a 5.0\% change from 200 to 400 cells, 1.6\% change from 400 to 600, 0.58\% change from 600 to 800 cells and a 0.42\% change from 800 to 1000 cells. Given that the number of operations performed by the code scales as approximately $N^2$ for $N$ cells, increasing the cell number heavily increases the computing cost. Table~\ref{tab:sol1dres} contains run times at different resolutions, and shows a stark increase in time for increasing resolution. The second run, at \neus $= 1.25\e{19}$ cm$^{-3}$, completed significantly faster than the first run because it was restarted from the near steady-state snapshot at the end of the first run. Therefore, each simulation time step is completed faster because the system is already rather stable, and only needs to accommodate an injection of an extra $0.25\e{19}$ cm$^{-3}$ of material in from the upstream.
 
 \begin{table}[]
 %\centering
@@ -111,7 +111,7 @@ An important first step when running grid simulations is to ascertain an accepta
 \label{tab:sol1dres}
 \begin{tabular}{l|l|l|l}
 \multicolumn{1}{l|}{\multirow{2}{*}{}} & \multicolumn{3}{l}{Time taken to complete 1000 time steps}    \\ \cline{2-4} 
- \multicolumn{1}{l|}{Resolution}        & \multicolumn{1}{l|}{\neus: $1.0\e{19}$ cm$^{-3}$} & \multicolumn{1}{l|}{$1.25\e{19}$ cm$^{-3}$}  &  \\ \hline
+ \multicolumn{1}{l|}{Resolution}        & \multicolumn{1}{l|}{\neus [$10^{19}$ cm$^{-3}$]: $1.0$} & \multicolumn{1}{l|}{$1.25$}  &  \\ \hline
                    200                 &      47m 44s          &    24m 23s         &  \\
                    400                 &      1h 48m 55s       &    2h 45m 4s       &  \\
                    600                 &      7h 40m 57s       &    5h 5m 4s        &  \\
@@ -120,9 +120,9 @@ An important first step when running grid simulations is to ascertain an accepta
 \end{table}
 
 \begin{figure}
-\includegraphics[scale=0.4]{Figures/sol1d/RichExtrp_neres.png}
+\includegraphics[scale=0.48]{Figures/sol1d/RE_neres1000.png}
 \centering
-\caption{Density at sheath, \netg, at approximately steady-state for different y-axis resolutions in SOL1D.}\label{fig:RichExtrp_neres}
+\caption{Density at sheath, \netg, at approximately steady-state for different y-axis resolutions in SOL1D.}\label{fig:RE_neres1000}
 \end{figure}
 
 Detachment can be seen occurring when examining the density profiles of different simulations, figure~\ref{fig:neprofneusALLtriang} shows systems in varying states of detachment caused by differing set upstream densities. Although the precise point at which an attached system becomes detached can be debated. Panel a) shows an attached system, and even the higher resolution cases struggle to resolve the density profile close to the target, which is why the profiles are very jagged. Panel b) displays a detached system: the density profile peak has shifted away from the target plate somewhat, cooling the divertor surface. The density profile in panel c) is also detached from the target, but more so than in panel b), as although the profile shape adjacent to the target is a similar shape the peak has shifted toward the upstream. Once the density profile has retreated from the target it is much more easily resolved, as the peak is spread over many more cells than when it sits close to the surface. However, the low resolution case, with 200 cells along the y-axis, still struggles to produce a smooth profile close to the plate even when the system is quite detached. 
