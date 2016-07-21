@@ -210,7 +210,7 @@ Implementing this new geometry requires estimating how the magnetic field change
 
 
 \subsubsection{Ion Viscosity}\label{sssecIonviscosity}
-To study the lack of saturation at higher \Ttg values, seen in figure~\ref{figPL_IMPCOMBO2logy}, simulations were run neglecting ion viscosity, $\eta_i$, in the system. As discussed in section~\ref{sssecPloss}, $\eta_i$ varies as $T^{5/2}$ so may blow up at high temperatures. When removing the effects of ion viscosity, the saturation observed experimentally is seen in the simulation data, which is shown in figure~\ref{figPL_iVpts}.
+To study the lack of saturation at higher \Ttg values, seen in figure~\ref{figPL_IMPCOMBO2logy}, simulations were run neglecting ion viscosity, $\eta_i$, in the system. As discussed in section~\ref{sssecPloss}, $\eta_i$ varies as $T^{5/2}$ so may blow up at high temperatures. When removing the effects of ion viscosity, the saturation observed experimentally is seen in the simulation data, which is shown in figure~\ref{figPL_iVpts}. Ignoring ion viscosity results in higher average ion velocity in the target area and hence higher target temperature, which is the drawback to removing these effects from the system. A possible method of retaining the pressure loss saturation alongside viscous ion properties would be to introduce a flux limiter into the SOL1D framework. The current heat flux model \cite{Braginskii1965} fails to get close to the real value at high temperature gradients, because it approximates heat flux as varying linearly with $\nabla T$ which misses the asymptote at $q_max$. This limit exists because heat in a system cannot flow faster than the electron thermal velocity in that system.
 
 \begin{figure}
 \includegraphics[scale=0.5]{Figures/sol1d/PL_iVpts.png}
@@ -218,6 +218,7 @@ To study the lack of saturation at higher \Ttg values, seen in figure~\ref{figPL
 \caption{Pressure loss data with and without the effects of ion viscosity, $\eta_i$, the inclusion of which prevents pressure loss saturation at higher \Ttg.}\label{figPL_iVpts}
 \end{figure}
 
+Free-streaming, or Spitzer Harm, thermal conductivity provides a better model of plasma heat flow, and is implemented in the Hermes 2D code.
 
 
 
