@@ -24,7 +24,7 @@
 \providecommand{\neus}{$n_{e~us}$} % upstream electron density shortcut
 \providecommand{\netarget}{$n_{e~target}$} % target electron density shortcut
 \providecommand{\netg}{$n_{e~tg}$} % target electron density shortcut
-\providecommand{\Tus}{$T_{tg}$} % Upstream temperature shortcut
+\providecommand{\Tus}{$T_{us}$} % Upstream temperature shortcut
 \providecommand{\Ttg}{$T_{tg}$} % Target temperature shortcut
 
 %\usepackage[left = 15mm, top = 15mm]{geometry} %margins
@@ -89,13 +89,13 @@ Brief overview of the importance of detachment for ITER and future tokamaks.
 
 
 \section{Experimental Design}\label{secExpt}
-SOL1D was installed on the remote server and some test simulations run to achieve a basic understanding of the set-up and outputs. The first aim was to ascertain an acceptable grid resolution to use, as a compromise is required concerning accuracy of results and time taken to run a simulation. SOL1D performs 1-dimensional simulations and the y-axis was chosen as the simulation axis. 
+SOL1D was installed on the remote server and some test simulations run to achieve a basic understanding of the set-up and outputs. The first aim was to ascertain an acceptable grid resolution, ny, to use, as a compromise is required concerning accuracy of results and time taken to run a simulation. SOL1D performs 1-dimensional simulations and the y-axis was chosen as the simulation axis. 
 
 Following SOL1D simulations, 2D simulations follow, with the initial goal being to compare results to the 1D case.
 
 \section{Results and Analysis}\label{secResults}
 \subsection{SOL1D}\label{ssecSOL1D}
-After a number of time-steps of SOL1D simulation it will usually settle down and get close to a steady-state solution. This can be seen in figure~\ref{figne_var_ny=800} - the variable's, \neupstream, oscillations are damped to a very small amplitude as the simulation progresses and it approaches steady-state, which took about 24 hours to reach its current point. Perhaps the simulation could have been stopped earlier, however this would increase the uncertainty in all the output data. Simulations with lower resolution do not reach a steady state in fewer time points, but they are faster to run so they reach it quicker in real time.
+After a number of time-steps of SOL1D simulation it will usually converge and approach to a steady-state solution. This can be seen in figure~\ref{figne_var_ny=800} - the variable's, \neupstream, oscillations are damped to a very small amplitude as the simulation progresses and it approaches steady-state, which took about 24 hours to reach its current point. Perhaps the simulation could have been stopped earlier, however this would increase the uncertainty in all the output data. Simulations with lower resolution do not reach a steady state in fewer time points, but they are faster to run so they reach it quicker in real time.
 
 \begin{figure}
 \includegraphics[scale=0.4]{Figures/sol1d/ne_var_ny=800.png}
@@ -107,15 +107,16 @@ An important first step when running grid simulations is to ascertain an accepta
 
 \begin{table}[]
 %\centering
-\caption{SOL1D simulation run times with different resolutions.}
+\caption{SOL1D simulation run times and percentage change in }
 \label{tabsol1dres}
-\begin{tabular}{l|l|l|l}
-\multicolumn{1}{l|}{\multirow{2}{*}{}} & \multicolumn{3}{l}{Time taken to complete 1000 time steps}    \\ \cline{2-4} 
- \multicolumn{1}{l|}{Resolution}        & \multicolumn{1}{l|}{\neus [$10^{19}$ cm$^{-3}$]: $1.0$} & \multicolumn{1}{l|}{$1.25$}  &  \\ \hline
-                   200                 &      47m 44s          &    24m 23s         &  \\
-                   400                 &      1h 48m 55s       &    2h 45m 4s       &  \\
-                   600                 &      7h 40m 57s       &    5h 5m 4s        &  \\
-                   800                 &      13h 18m 55s      &    7h 1m 28s       &  
+\begin{tabular}{l|l|l|l|l|l}
+\multicolumn{1}{l|}{\multirow{2}{*}{}} & \multicolumn{3}{l}{Time taken to complete 1000 time steps}    \\ \cline{2-3} 
+ \multicolumn{1}{l|}{Resolution}        & \multicolumn{1}{l|}{\neus = $1.0$} & \multicolumn{1}{l|}{\neus = $1.25$}  & \netg & \% change  \\ \hline
+                   200                 &      47m 44s          &    24m 23s         &  put    &  -    \\
+                   400                 &      1h 48m 55s       &    2h 45m 4s       &  values & 5.0   \\
+                   600                 &      7h 40m 57s       &    5h 5m 4s        &  in     & 1.6   \\
+                   800                 &      13h 18m 55s      &    7h 1m 28s       &  here   & 0.58  \\
+                  1000                 &                   &                        & *value* & 0.42
 \end{tabular}
 \end{table}
 
@@ -223,6 +224,8 @@ A possible method of retaining the pressure loss saturation alongside viscous io
 Free-streaming, or Spitzer Harm, thermal conductivity provides a better model of plasma heat flow, and is implemented in the Hermes 2D code. \textbf{trying to port this into sol1d}
 
 The extended divertor leg in the SXD geometry enables simulations to settle down far quicker than in the CD set up, as the power input (at the midplane) is much farther removed from the complicated and delicately balanced interactions at the target. 
+
+
 
 
 \section{Conclusion}\label{secConclusion}
