@@ -85,7 +85,40 @@ Brief overview of the importance of detachment for ITER and future tokamaks.
 
 - 
 
+
+- Equations SOL1D is built on (fluid model)\\
+a) In order to study detachment, and volumetric processes along the whole length of the SOL, such as friction between plasma and neutral flows, the evolution of the properties of the divertor plasma must be known. Parallel transport in a plasma, following the direction of the magnetic field, is well understood. Therefore producing a 1-dimensional model of the SOL does not require a great deal of complexity past the 1D fluid equations. These equations are derived from integrals of successive moments of the 1D Fokker-Planck kinetic vector equation \cite{Stangeby}.
+
+\begin{equation}\label{eqDensity}
+\frac{\partial n}{\partial t} = -\nabla . (\textbf{b}V_{\parallel}n) + S_n - S
+\end{equation}
+b) Plasma density is evolved as in equation~\ref{eqDensity} where $S_n$ is the external source of plasma ions and $S=R_rec - R_iz$ (recombination rate minus ionisation rate) is the net recombination of plasma particles, or a source of neutrals. The variation of plasma density at a given region depends on the rate of plasma particles leaving that point, the source of plasma particles to the area, and the net conversion of plasma to neutrals in that region.
+
+\begin{equation}\label{eqMomentum}
+\frac{\partial}{\partial t}(m_i n V_{\parallel}) = -\nabla . (m_i n V_{\parallel} \textbf{b} V_{\parallel}) + \partial_{\parallel}p - F
+\end{equation}
+
+c) Momentum evolution, described in equation~\ref{eqMomentum}, evolves the balance between the plasma flow momentum, $m_inV_{\parallel}\textbf{b}V_{\parallel}$ where $\textbf{b}$ is the unit vector in the direction of the magnetic field, and the parallel pressure, with the addition of F as the loss of momentum of the ions due to recombination and charge exchange. The plasma flow momentum term is an average over the fluid, whereas $\partial_{\parallel}p$ is part of the inertia of the plasma.
+
+d) Energy 
+$S_p$ is a source of pressure, E
+
+
+Additionally, the model assumes local ambipolarity, meaning that the parallel current density, $j_{\parallel}$ throughout the 1D system is zero. 
+
+- 2 Point Model (section 5.4 in Stangeby)\\
+a) The simplest model of the divertor leg is the two-point model, which looks at the differences between the upstream, point one, and the target, point two. Given that the main aim of SOL modelling is to seek ways to reduce the extremely high fluxes at the upstream before they reach the target, for simple analysis only the effect on the target of upstream variations need to be noted. Neutrals are recycled from the divertor plate into a thin layer in front of the target, where they are ionised and subsequently impact the target again. This cycle repeats indefinitely and so the only plasma flow in this model occurs in the thin layer adjacent to the target where the recycled neutrals are ionised.
+
+b) has 3 equations containing 3 unknowns: \netg, \Ttg and \Tus, because \neus and $q_{\parallel}$ are independent variables in any tokamak, these equations are derived as steady-state versions of the previously shown fluid equations.
+
+
 - Pressure loss (1997Pitcher review of Experimental Divertor physics - p 45)
+
+- Heat Flow (Braginskii vs Free Streaming) - Flux Limiter
+"Braginskii" is mentioned on \textbf{p.399} of Stangeby
+a) Classical ion heat transport, $q_i$, is proportional to the temperature gradient in the SOL (all variables are parallel to the 1D simulation axis) and is known as the Braginskii heat flux relation \citep{Braginskii1965}. This model works well at low temperatures and when the mean free path is short compared to the system's scale lengths, or otherwise it assumes that particles undergo frequent collisions. However, when $\nabla T$ is very high, the scale length over which the temperature changes a large amount becomes fairly close to the size of the collisional mean free path. Consequently, the model over estimates the heat flux at high $\nabla T$ because some particles' collision lengths are very large, hence they travel most of the SOL unhindered.
+
+This means and infinite temperature gradient would produce infinitely fast heat conduction. Clearly this is not possible given that the plasma species, that are the carriers of the heat, have finite speeds. The thermal electron velocity sets the upper limit on heat transport, as heat cannot travel faster than the fastest particles. 
 
 
 \section{Experimental Design}\label{secExpt}
@@ -229,6 +262,10 @@ The extended divertor leg in the SXD geometry enables simulations to settle down
 
 
 \section{Conclusion}\label{secConclusion}
+
+- Applicability of Detachment in areas other than fusion: Coronal Loops exhibiting detachment (need to flick through the 2 papers I have on this topic) 
+Prominences: A. De Groof, et al, A\&A 443, 319–328 (2005)
+Coronal Rain: P. Antolin et al, 280 (2012) 457.
 
 
 
