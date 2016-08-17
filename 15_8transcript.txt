@@ -1,0 +1,91 @@
+Q1: Impvar pressure loss (and more)
+
+Spell out exactly what a figure is showing in the caption.
+...again there's no saturation because ion visc is turned on
+B: it's kinda surprising and nice that they all lie on the same curve. Shows that pressure loss is basically a function of the energy loss, so it's not friction but energy that you are losing because the impurity added doesn't provide any friction, it is only radiating energy which is enough to make the difference in PLoss.
+the width of the black profile - %C doesn't seem to effect the PLoss very much
+the red looks like it's wider than the black and the blue is at least as wide as the red, so it looks like increasing density makes it increasingly sensitive to impurity fraction
+M: Higher ne --> lower T --> more radiative loss.  If %C is higher then the energy loss is ﻿higher﻿ I guess?
+B: The impurity fraction doesn't directly introduce more friction, just radiating more power, i guess there is kind of a feedback as you drop Ttg you'll get more neutral penetration into the upstream (?) so then the plasma could have more friction with the neutrals.
+Pressure loss caused by friction with neutrals
+Pressure is combination of static thermal pressure & dynamic ram pressure just from the motion of the ions
+so the sheath makes the two equal at the sheath, whereas further upstream away from target the velocity is much smaller so static >> dynamic
+looks like here you're detaching maybe without any friction so you could take away pressure with friction (momentum of neutrals) or by taking out energy, and it looks like in this case just taking out energy is enough to make the system detach.
+so you can get to the same amount of pressure loss two ways (?)
+on PLoss fig, at ~4ev [﻿multiply T axes by 100!﻿] there's a red blue and purple point close together, so it shows that varying impurity fraction can give the same result at very different upstream densities - just by radiating more power! 
+M: Defining Windows of operation (upstream density + impvar)
+B: so from this graph you could have a more general discussion, they are all varying over the same range of %C and the high ne cases are more sensitive to %C than lower
+we're now going to pick a more interesting case (e.g. ne=2.4) and discuss in more detail
+
+
+Q2: NLOSS
+
+M: nes of 8 and 9 will not converge, don't know whether to cut them off or just say they haven't converged
+B: depends how much space you have for explanation - if you put them in then you do need to explain why they are odd points
+M: qualitatively or quantatively? to compare to experimental results
+B: just say it in words. Would be good to have some more sims at lower densities
+M I'll run a few more in between
+at higher nloss the slope always seems to be decreasing
+hopefully with new data I will be able to say if at lower nloss (1e4) the initial slope is increasing (hopefully quadratically!) at the beginning
+ben will see why mine failed (already sent paths to him
+set up meeting with Bruce - yeah!
+compare an experimental figure of his with my simulation data?
+TEMPERATURE RATIO
+don't follow same curve at all, unlike PLoss does
+1e4 and 1e4 both level out but green always above red
+NEED to plot just Ttg Tus figs to check how the Tus or Ttg varies (maybe just plot all Tus's on one plot? or Ttgs for that matter, then put both that and the TR fig in so it is possible to explain the leveling out to a different minimum)
+Q3: Frec, less interesting results, do I need to include figure?
+
+as plasma cools, more recombination reactions so momentum lost to neutrals 
+B: could be good to put all Frec, Fiz and Fcx for one density on the same plot
+could pull out top (most interesting) two or three processes and plot them separately?
+or could integrate along y, so e.g. for each case like Fiz you get one number per density: then could display pretty much all of them on one figure?
+as it detaches which terms are the biggest and does it change over time
+﻿I need to work out what the units of Energy, momentum and particle transfer axes are﻿
+Qx: Rrec
+
+negative Rrec --> due to 3-body recombination
+if you start with 2 bodies (e and i) they recombine into 1, very difficult to conserve Momentum ﻿and﻿ Energy, momentum is easy but there is often energy left over
+energy difference, someitmes it can be radiated away: POSITIVE Rrec
+but another way is to give that energy to a third particle: NEGATIVE Rrec, normally gives it to another electron
+1st electron drops into bound state of ion, making a neutral
+Energy released is difference between ionisation energy of atom and the energy level that the 1st electron is now bound to.
+2nd electron picks up this energy, making a hot electron and a colder neutral === hence how Rrec can be negative: energy is given to plasma (﻿my only thought about this is that there are no neutrals involved at the beginning so the only neutral that loses energy is that which was initially an electron and an ion from the plasma so technically might neutrals be gaining more energy? ﻿however probably the ionisation energy of the atom is much larger than the species' previous energies (which is mostly given to the plasma)﻿﻿
+heats up the plasma because you are releasing ~13.6eV of energy into the plasma
+
+
+
+Q4: Ecx oscillations +ve -ve
+
+Negative parts of Ecx: neutrals are hotter than the plasma in those regions, so when you get charge exchange they lose energy to the plasma
+
+M: spatial area where that happens is not really related to where the detached ne peak
+
+B: the electrons are cooled very quickly becasue they are near the plate (don't konw how physical it is) [sic] so the energy is streaming out through the plate (?) but the neutrals don't relaly have a loss mechanism to the wall (there are many differnt models you can use for how fast the neutrals should cool) as they go into the wall 
+
+in this case the electrons have very strong cooling, in this model the electrons and ions are strongly coupled together, so no separate temp Ti=Te, so maybe in these negative regions there are cold electrons but in fact the ions should be hotter than the electrons. So charge exchange reactions switch Ti and Tn, but because Ti=Te then it is switching Te with Tn﻿, so we are overestimating how fast the ions cool --> because now they become colder than neutrals in some places which is unlikely.
+
+in the model the ions are getting too cold and they are dropping below the neutral temperature, when charge exchange is really strong you would expect the tempreature of the two species to be about the same --> ﻿Ti﻿=﻿Tn﻿. and maybe Te should be colder than the other two, because they are cooled by the wall quite quickly
+The density is quite high in this case (2.4e19) so you get quite high collision rates and that would tend to make the electron ion temperatures equal.
+
+--> ne=3.0e19 whole area (almost) between plate and ~20m is negative Ecx. Whereas Ecx profile is all positive when attached
+
+interesting, so here got heating of neutrals by recombination (Erec) and cooling by charge exchange near plate, solid red line ions are heating neutrals and dotted red line the neutrals are heating the ions.
+
+Can definitely discuss this in the report - whether having ions, Ti is lower than Tn, don't know how physical that is
+
+but if you're cooling electrons then they collide with the ions and cool them (then maybe it could happen), whereas the neutrals are coming from Recombination reactions on the surface so they come off the wall with 2eV of energy, especially if you have a molecular process then you have this Franck-Condon typical energy which is ~3.5eV, so if you have molecules being discociated and then recombining you have a typical energy range of a few eV so a typical energy for neutrals/atoms in that regime is said energy of 3.5eV
+
+which in this case is higher than the ion temperatures!
+
+Where are the cold electron temperatures coming from? -- the upstream plasma is cooling down throughout the SOL and then you have a very strong sink of energy at the sheath, electron heat conduction is still pretty fast (varies as T^(5/2) ) 
+
+
+
+Q7: 2point model
+
+background section: yes it is used because recording things at target and upstream is easier than in between, also gives you rough scalings for how things change throughout the SOL, relationship between Ptg and Tus, netg and Tus etc. Gives you simple scaling for if you doubled upstream density how would that affect things at the target etc.
+
+not necessarily always true but good approximation to start with
+
+They are derived from the 1D fluid equations, make them steady state, throw away a few terms and you get  to the 2 point model

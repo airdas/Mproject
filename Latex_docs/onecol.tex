@@ -20,12 +20,15 @@
 \providecommand{\e}[1]{\ensuremath{\times 10^{#1}}} %for scientific notation
 \providecommand{\squiggle}{\raise.17ex\hbox{$\scriptstyle\sim$}} %for tilde character
 \providecommand{\noNe}[1]{{${#1}\times 10^{19}$ cm$^{-3}$}} % for writing density as a number followed by cm^-3
-\providecommand{\neupstream}{$n_{e~upstream}$} % upstream electron density shortcut
-\providecommand{\neus}{$n_{e~us}$} % upstream electron density shortcut
-\providecommand{\netarget}{$n_{e~target}$} % target electron density shortcut
-\providecommand{\netg}{$n_{e~tg}$} % target electron density shortcut
-\providecommand{\Tus}{$T_{us}$} % Upstream temperature shortcut
-\providecommand{\Ttg}{$T_{tg}$} % Target temperature shortcut
+\providecommand{\pow}[1]{{$^{#1}$}} % for writing a power in math mode (i.e. for units)
+
+%%******** need tilde after variable names so there is a space between them and the following word **********
+\providecommand{\neupstream}{$n_{e~upstream}~$} % upstream electron density shortcut
+\providecommand{\neus}{$n_{e~us}~$} % upstream electron density shortcut
+\providecommand{\netarget}{$n_{e~target}~$} % target electron density shortcut
+\providecommand{\netg}{$n_{e~tg}~$} % target electron density shortcut
+\providecommand{\Tus}{$T_{us}~$} % Upstream temperature shortcut
+\providecommand{\Ttg}{$T_{tg}~$} % Target temperature shortcut
 
 %\usepackage[left = 15mm, top = 15mm]{geometry} %margins
 \usepackage{amssymb} % Allows use of \therefore command to get the three dots in a triangle symbol
@@ -121,10 +124,12 @@ a) Classical ion heat transport, $q_i$, is proportional to the temperature gradi
 This means and infinite temperature gradient would produce infinitely fast heat conduction. Clearly this is not possible given that the plasma species, that are the carriers of the heat, have finite speeds. The thermal electron velocity sets the upper limit on heat transport, as heat cannot travel faster than the fastest particles. 
 
 
+-*********- Short literature review of other divertor simulations (do at end if I have time) 
+
 \section{Experimental Design}\label{secExpt}
 SOL1D was installed on the remote server and some test simulations run to achieve a basic understanding of the set-up and outputs. The first aim was to ascertain an acceptable grid resolution, ny, to use, as a compromise is required concerning accuracy of results and time taken to run a simulation. SOL1D performs 1-dimensional simulations and the y-axis was chosen as the simulation axis. 
 
-Following SOL1D simulations, 2D simulations follow, with the initial goal being to compare results to the 1D case.
+***Following SOL1D simulations, 2D simulations follow, with the initial goal being to compare results to the 1D case.***
 
 \section{Results and Analysis}\label{secResults}
 \subsection{SOL1D}\label{ssecSOL1D}
@@ -190,7 +195,7 @@ Simulations from \noNe{3} onwards shown in figure~\ref{figTT_IMPCOMBO2} are deta
 
 
 \subsubsection{Pressure Loss}\label{sssecPloss}
-Pressure ratio $2\frac{P_{tg}}{P_{us}}$ was calculated for the density scan data with different resolutions and plotted against target plate temperature in figure~\ref{figPL_IMPCOMBO2logy}; the data from varied resolutions show good agreement. Experimentally, pressure loss ratio saturates to unity at high target temperatures due to the relation between static and viscous (?) pressure (maths is on p18 of lab book) and falls as \Ttg decreases after the system has started to detach. Experimental pressure loss data is displayed in figure~\ref{figPlossAlcator}. The sharp drop in pressure loss ratio below 3 eV is thought to be caused by atomic effects which become relevant at those lower temperatures \cite{Pitcher1997}.
+Pressure ratio $2\frac{P_{tg}}{P_{us}}$ was calculated for the density scan data with different resolutions and plotted against target plate temperature in figure~\ref{figPL_IMPCOMBO2logy}; the data from varied resolutions show good agreement. Experimentally, pressure loss ratio saturates to unity at high target temperatures due to the relation between static and dynamic (?) pressure (maths is on p18 of lab book) and falls as \Ttg decreases after the system has started to detach. Experimental pressure loss data is displayed in figure~\ref{figPlossAlcator}. The sharp drop in pressure loss ratio below 3 eV is thought to be caused by atomic effects which become relevant at those lower temperatures \cite{Pitcher1997}.
 
 Pressure loss saturation is not observed in the simulations shown in figure~\ref{figPL_IMPCOMBO2logy}, and this discrepancy is expected to be due to the way ion viscosity is handled in the system. Ion viscosity varies like $\eta_i \propto \tau_i T \propto T^(\frac{5}{2}$, where $\tau_i$ is the ion collision time, hence this term in the overall viscosity equation is likely to blow up at higher temperatures, which would lead to the lack of saturation seen here. 
 
@@ -205,6 +210,8 @@ Pressure loss saturation is not observed in the simulations shown in figure~\ref
 \centering
 \caption{Pressure loss ratio, $\frac{2P_{tg}}{P_{us}}$, data from Alcator C-Mod \cite{Lipschultz2007}.}\label{figPlossAlcator}
 \end{figure}
+
+SOL pressure is a combination of the static thermal pressure and the dynamic pressure, which is due to the motion of the ions. Pressure loss between the upstream and the target is caused by the friction between the plasma and the neutrals. In much of the SOL, the thermal velocity is greater than the ion velocity, so $P_{static} >> P_{dynamic}$. However, at the sheath, ion velocity is equal to the sound speed, making the two pressures equal. As \neus increases, so does pressure loss, because a larger number of particles in the same volume leads to greater friction between the plasma and neutrals.
 
 
 
@@ -244,7 +251,7 @@ Implementing this new geometry requires estimating how the magnetic field change
 
 
 \subsubsection{Ion Viscosity}\label{sssecIonviscosity}
-To study the lack of saturation at higher \Ttg values, seen in figure~\ref{figPL_IMPCOMBO2logy}, simulations were run neglecting ion viscosity, $\eta_i$, in the system. As discussed in section~\ref{sssecPloss}, $\eta_i$ varies as $T^{5/2}$ so may blow up at high temperatures. When removing the effects of ion viscosity, the saturation observed experimentally is seen in the simulation data, which is shown in figure~\ref{figPL_iVpts}. Ignoring ion viscosity results in higher average ion velocity in the target area and hence higher target temperature, which is the drawback to removing these effects from the system. Another drawback is that these simulations take significantly longer to reach near steady-state conditions, as ion viscosity is a large contributor to damping in the system.
+To study the lack of saturation at higher \Ttg values, seen in figure~\ref{figPL_IMPCOMBO2logy}, simulations were run neglecting ion viscosity, $\eta_i$, in the system. As discussed in section~\ref{sssecPloss}, $\eta_i$ varies with $T^{5/2}$, so it is likely to blow up at high temperatures. When removing the effects of ion viscosity, the saturation observed experimentally is seen in the simulation data, which is shown in figure~\ref{figPL_iVpts}. Ignoring ion viscosity results in higher average ion velocity in the target area and hence higher target temperature, which is the drawback to removing these effects from the system. Another drawback is that these simulations take significantly longer to reach near steady-state conditions, as ion viscosity is a large contributor to damping in the system.
 
 A possible method of retaining the pressure loss saturation alongside viscous ion properties would be to introduce a flux limiter into the SOL1D framework. The current heat flux model \cite{Braginskii1965} fails to get close to the real value at high temperature gradients, because it approximates heat flux as varying linearly with $\nabla T$ which misses the asymptote at $q_max$. This limit exists because heat in a system cannot flow faster than the electron thermal velocity in that system.
 
@@ -254,9 +261,56 @@ A possible method of retaining the pressure loss saturation alongside viscous io
 \caption{Pressure loss data with and without the effects of ion viscosity, $\eta_i$, the inclusion of which prevents pressure loss saturation at higher \Ttg.}\label{figPL_iVpts}
 \end{figure}
 
-Free-streaming, or Spitzer Harm, thermal conductivity provides a better model of plasma heat flow, and is implemented in the Hermes 2D code. \textbf{trying to port this into sol1d}
+Free-streaming thermal conductivity provides a better model of plasma heat flow, and is implemented in the Hermes 2D code. \textbf{trying to port this into sol1d}
 
 The extended divertor leg in the SXD geometry enables simulations to settle down far quicker than in the CD set up, as the power input (at the midplane) is much farther removed from the complicated and delicately balanced interactions at the target. 
+
+
+
+\subsection{Neutral Loss}\label{ssecNloss}
+Rate of neutral loss in the divertor leg can vary largely depending on their interaction mean free path, $\lambda_{mfp}$. If $\lambda_{mfp}$ becomes comparable to the width of the plasma channel in the leg then neutral lifetime in the plasma will become very short \textbf{(what can cause $\lambda_{mfp}$ to change?)}. In SOL1D, the rate of neutral loss is called $nloss$ and was set to $1\e{3}$ s\pow{-1} for all previous simulations. 
+
+Using the super-X geometry, nloss was varied between 1\e{3} and 1\e{5} s\pow{-1}. Saturation current density at the sheath, $j_{sat~tg}$, was plotted against upstream density at various values to provide the $j_{sat~tg}$ profiles shown in figure~\ref{fignloss1e345,52.5e425_2}. Increasing nloss has a stark effect on the roll over region of the $j_{sat~tg}$ profile, it moves to higher density as nloss increases. The initial $j_{sat~tg}$ gradient changes significantly with nloss. At nloss = $1\e{4}$ s\pow{-1} the gradient grows initially and then decreases when detachment starts and $j_{sat~tg}$ rolls over. In contrast, the $j_{sat~tg}$ profile gradients for the higher nloss runs are always decreasing even at low \neus. 
+
+\begin{figure}
+\includegraphics[scale=0.5]{Figures/sol1d/nloss1e345,525e425_2.png}
+\centering
+\caption{Saturation current density at the sheath, $j_{sat~tg}$ vs. upstream density, \neus, at different neutral lifetimes, nloss. Nloss has units of [s\pow{-1}].}\label{fignloss1e345,52.5e425_2}
+\end{figure}
+
+
+Several lower density simulations failed at all values of nloss, which is likely due to particles leaving the system too quickly for the density controller in the upstream to adjust. Once a lot of particles leave the system, because the power input stays the same, the overall temperature increases. Ion velocity into the sheath is set to the sound speed, and $v_S \propto \sqrt{T}$, so the rate of particles leaving the system into the sheath increases. This produces a vicious cycle as the temperature keeps increasing while more particles leave the system, and particles leave the plasma faster the higher the temperature.
+
+
+Experimentally one would expect...\textbf{Bruce's TCV results go here}
+
+
+
+
+
+\subsection{Impurity Fraction}\label{ssecImpfrac}
+Impurity fraction in the divertor heavily influences the amount of power lost to radiation, as impurities are a largest contributor to volumetric radiative power loss in a hydrogenic plasma. SOL1D takes an input that sets the percentage of carbon impurity in the system. Figure~\ref{figCvarPL5nes} shows the pressure loss ratio at different impurity fractions and upstream densities against the target temperature. Interestingly, all the profiles follow the same overall curve, which suggests that pressure loss is a function of the energy loss, because increasing the impurity fraction does not add any more friction to the system. Therefore, the additional loss of pressure as the percentage of carbon goes up is due to the extra energy loss from impurity radiation.
+
+\begin{figure}
+\includegraphics[scale=0.5]{Figures/sol1d/CvarPL5nes.png}
+\centering
+\caption{Pressure loss ratio, $2P_{tg}/P_{us}$ vs target temperature, \Ttg. Impurity fraction was changed to give the five different curves are at varied \neus. Densities 1, 1.5 and \noNe{2} were run with impurity percentages 0, 0.4, 0.5, 0.8, 1.0, 1.2, 1.5, 1.6 and 2.0. Whereas densities 2.4 and \noNe{2.7} were run with 0, 0.5, 1.0, 1.5 and 2.0.}\label{figCvarPL5nes}
+\end{figure}
+
+Examining the spread of values at each \neus in figure~\ref{figCvarPL5nes}, impurity fraction has an increasing affect on the pressure loss as \neus increases. At the lowest upstream density the effect of increasing the carbon fraction does not lead to any significant change in the progress of detachment. Following a 50\% density increase to \noNe{1.5}, the carbon fraction change causes a fivefold wider \Ttg spread, and this range is at least as wide again for \noNe{2}. A higher \neus at fixed power input leads to a lower overall temperature, which in turn leads to more radiative energy loss as more ions, hydrogenic and carbon, recombine with electrons which then transition to lower atomic electron levels, radiating away more energy. Carbon in the plasma itself does not introduce extra friction to cause the observed loss of pressure, however; as the average temperature falls, friction between the plasma and neutrals will increase. This is because neutral penetration will extend further into the upstream as temperature drops, due to the fact that their ionisation mean free path is longer.
+
+Near 4 eV in figure~\ref{figCvarPL5nes} lie points from the red, blue and purple sets, showing that system state over large density gaps can be bridged simply by varying impurity fraction. Here, the blue (\noNe{2}) point is with 1\% impurity concentration, which is the same data in figure~\ref{figTT_IMPCOMBO2}, and is at the beginning of detachment. Hence the overlapping point from the \noNe{1.5} set, 2\% carbon, has been brought to the cusp of detachment, compared to the same density in figure~\ref{figTT_IMPCOMBO2}, by doubling the impurity fraction. The purple point here is at 0.5\% carbon, highlighting that just half a percent less impurities in a plasma can bring it from complete detachment (see \neus = \noNe{2.7} points in figure~\ref{figTT_IMPCOMBO2}) to a position where detachment is only just beginning.
+
+
+
+
+\subsection{Particle Transfer}\label{ssecPtrans}
+
+
+\subsection{Energy Transfer}\label{ssecEtrans}
+
+Plasma-neutral energy transfer through charge exchange shows some interesting changes as the system detaches from the target plates. Pre-detachment, the plasma loses energy to the neutrals when hot ions pick up electrons from a colder neutrals, producing hot neutrals and cold ions. In the midst of detaching the ions and neutrals alternate being hottest in distinct regions, from the target plate to 2 metres into the upstream, seen in figure~\ref{figEcxBalance2.4ne}. Electron heat transport is quick so they are cooled fastest further away from the plates during detachment. When charge exchange occurs, the ion temperature, $T_i$, is effectively swapped for the neutral temperature, $T_n$. Ions and electrons are strongly coupled in SOL1D, $T_i = T_e$, therefore; the more cool electrons that permeate into the upstream, the more charge exchange reactions will be swapping cold $T_e$ for hotter $T_n$.
+
 
 
 
@@ -266,6 +320,10 @@ The extended divertor leg in the SXD geometry enables simulations to settle down
 - Applicability of Detachment in areas other than fusion: Coronal Loops exhibiting detachment (need to flick through the 2 papers I have on this topic) 
 Prominences: A. De Groof, et al, A\&A 443, 319–328 (2005)
 Coronal Rain: P. Antolin et al, 280 (2012) 457.
+
+
+
+
 
 
 
