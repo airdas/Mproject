@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}  % for review and submission
+\documentclass[12pt]{article}  % for review and submission
 %\documentclass[aps,preprint,showpacs,superscriptaddress,groupedaddress]{revtex4}  % for double-spaced preprint
 \usepackage{graphicx}  % needed for figures
 \usepackage{dcolumn}   % needed for some tables
@@ -83,11 +83,12 @@
 \section{Background}\label{secBg}
 Brief overview of the importance of detachment for ITER and future tokamaks.
 - Current material limit
+Heat fluxes entering the scrape-off layer (SOL) in current tokamaks are mitigated by several methods including neutral gas puffing and angular offsetting the divertor plates to spread the flux over a wider area. In ITER, the SOL heat flux will be far higher, around 1 GW m\pow{-2} \cite{Loarte2007}, reducing the capability of present cooling methods. This will expose the divertor plates to minimum 10 MW m\pow{-2} during normal operation, with peak power fluxes during ELMs of twice that amount \cite{Loarte2007}; heat fluxes below 10 MW m\pow{-2} are required by current materials. This high power flux is unavoidable, as $ P_{SOL} \approx 100$ MW, the power entering the SOL, is fixed, and the SOL heat channel is estimated to be around 1 mm \cite{Eich2013}, and depends on factors innate to reactor design. Since these high heat fluxes entering the SOL cannot be changed, ways must be found to reduce them throughout the divertor region.
 
 - Divertor geometries (conventional, super-X, snowflake)
 
-- 
 
+- SOL1D geometry: a field line in the separatrix from the outboard midplane to the divertor plate, stretched out into a straight line. The section between midplane and X-point is where heat and particles enter the system from the core plasma; no heat enters between the X-point and the target, and particles only enter this region when they are recycled from the walls.
 
 - Equations SOL1D is built on (fluid model)\\
 a) In order to study detachment, and volumetric processes along the whole length of the SOL, such as friction between plasma and neutral flows, the evolution of the properties of the divertor plasma must be known. Parallel transport in a plasma, following the direction of the magnetic field, is well understood. Therefore producing a 1-dimensional model of the SOL does not require a great deal of complexity past the 1D fluid equations. These equations are derived from integrals of successive moments of the 1D Fokker-Planck kinetic vector equation \cite{Stangeby}.
@@ -105,6 +106,8 @@ c) Momentum evolution, described in equation~\ref{eqMomentum}, evolves the balan
 
 d) Energy 
 $S_p$ is a source of pressure, E
+
+e) Boundary conditions: particles enter the upstream at such a rate as to keep the upstream density constant
 
 
 Additionally, the model assumes local ambipolarity, meaning that the parallel current density, $j_{\parallel}$ throughout the 1D system is zero. 
@@ -126,58 +129,79 @@ This means and infinite temperature gradient would produce infinitely fast heat 
 
 -*********- Short literature review of other divertor simulations (do at end if I have time) 
 
+>Detachment is loosely defined as when the target temperature falls below 5 eV \cite{Porter1996}, and the upstream temperature no longer dictates \Ttg. 
+
+> Attached plasmas are characterised by high target densities, ion current and target temperature. Beginning detachment initiates steep drops in \Ttg and \netarget and ion current to the divertor sheath (or target plate) \cite{Stacey2001}, as well as extensive parallel pressure loss from the target toward the upstream \cite{Nakazawa2000}.
+
+>Linear plasma devices have been used to simulate divertor detachment \cite{Nishijima2002, Ohno2002}
+
+> We investigate Super-X divertor (SXD) geometry, as well as conventional divertor (CD) geometry, as it is thought that the extended SXD leg will allow more control over the extent of detachment \cite{Valanju2009}. Divertor geometry has been shown in simulation and experiment to have large effects on the extent of detachment over a variety of operating conditions \cite{Pitts2001}.
+
+> Many problems arise when attempting to control the stability of detachment in experiments \cite{Lipschultz2016}, which ideally aim to fix the low temperature and pressure detached region between the X-point and target, in order to prevent it impacting on core performance.
+
+> Detachment reduces the compression of impurities in the divertor region \cite{Bosh2001} so impurity transport during detachment requires further analysis.
+
+
+We first investigate how SOL1D, a one dimensional fluid equation code, deals with detachment and confirm that factors influencing detachment in experiment and other simulations have similar effects on the state of detachment. Following this, the underlying processes causing detachment are examined in an effort to better understand this phenomenon which is likely to prove vital for future high power tokamaks. Detachment stability is very susceptible to upstream variation and other external factors, for example upstream density and impurity fraction \cite{Lipschultz2016}, and needs better understanding before detachment can be successfully controlled throughout a range of operating scenarios in ITER and other future machines. 
+
+
 \section{Experimental Design}\label{secExpt}
-SOL1D was installed on the remote server and some test simulations run to achieve a basic understanding of the set-up and outputs. The first aim was to ascertain an acceptable grid resolution, ny, to use, as a compromise is required concerning accuracy of results and time taken to run a simulation. SOL1D performs 1-dimensional simulations and the y-axis was chosen as the simulation axis. 
+\textbf{reword or remove:} SOL1D was installed on a remote server and some test simulations run to achieve a basic understanding of the set-up and outputs. 
 
-***Following SOL1D simulations, 2D simulations follow, with the initial goal being to compare results to the 1D case.***
+Simulations run with SOL1D used a plasma fluid model with the partial differential equations detailed in section~\ref{secBg} solved iteratively over a 1D grid. Divertor neutral population is evolved according to a diffusive model, where a recycling fraction and neutral lifetime may be set depending on the desired neutral conditions. The main input parameters for these simulations are upstream density, SOL power flux input, number of grid cells, and impurity fraction. The system is initialised with uniform density and temperature, then the chosen parameter values are injected in and the density, pressure and particle flux (for both plasma and neutrals) are calculated over the grid at each time step. A steady state solution then takes varying amounts of time to materialise, depending on the extent of the differences between the initial state and the initial conditions imposed on the system, as violent sound waves travel back and forth between the upstream and target before the system starts to converge. Particle, momentum and energy sinks are also calculated, including volumetric radiative losses.
 
-\section{Results and Analysis}\label{secResults}
-\subsection{SOL1D}\label{ssecSOL1D}
-After a number of time-steps of SOL1D simulation it will usually converge and approach to a steady-state solution. This can be seen in figure~\ref{figne_var_ny=800} - the variable's, \neupstream, oscillations are damped to a very small amplitude as the simulation progresses and it approaches steady-state, which took about 24 hours to reach its current point. Perhaps the simulation could have been stopped earlier, however this would increase the uncertainty in all the output data. Simulations with lower resolution do not reach a steady state in fewer time points, but they are faster to run so they reach it quicker in real time.
+The first aim was to ascertain an acceptable grid resolution, ny, to use, as a compromise is required concerning accuracy of results and time taken to run a simulation. SOL1D performs 1-dimensional simulations and the y-axis was chosen as the simulation axis. 
+
+\textbf{Reword:} After a number of time-steps a SOL1D simulation will usually converge and approach a steady-state solution. This can be seen in figure~\ref{figne_var_ny=800} - the variable's, \neupstream, oscillations are damped to a very small amplitude as the simulation progresses and it approaches steady-state, which took about 24 hours to reach its current point. Perhaps the simulation could have been stopped earlier, however this would increase the uncertainty in all the output data. Simulations with lower resolution do not reach a steady state in fewer time points, but they are faster to run so they reach it quicker in real time.
 
 \begin{figure}
-\includegraphics[scale=0.4]{Figures/sol1d/ne_var_ny=800.png}
-\centering
-\caption{The variation of \neus with simulation time step. \textbf{should maybe put the oscillations from other resolutions on the same figure to make it more interesting?}}\label{figne_var_ny=800}
+	\includegraphics[scale=0.4]{Figures/sol1d/ne_var_ny=800.png}
+	\centering
+	\caption{The variation of \neus with simulation time step. \textbf{should maybe put the oscillations from other resolutions on the same figure to make it more interesting?}}\label{figne_var_ny=800}
 \end{figure}
 
-An important first step when running grid simulations is to ascertain an acceptable resolution to use. Figure~\ref{figRE_neres1000} shows the approximate steady-state value of \netarget for different resolutions. The choice of resolution has to take into account the accuracy of the output and the time taken to receive said output. It is clear that \netg is tending towards a value at infinite resolution. There is a 5.0\% change from 200 to 400 cells, 1.6\% change from 400 to 600, 0.58\% change from 600 to 800 cells and a 0.42\% change from 800 to 1000 cells. Given that the number of operations performed by the code scales as approximately $N^2$ for $N$ cells, increasing the cell number heavily increases the computing cost. Table~\ref{tabsol1dres} contains run times at different resolutions, and shows a stark increase in time for increasing resolution. The second run, at \neus $= 1.25\e{19}$ cm$^{-3}$, completed significantly faster than the first run because it was restarted from the near steady-state snapshot at the end of the first run. Therefore, each simulation time step is completed faster because the system is already rather stable, and only needs to accommodate an injection of an extra $0.25\e{19}$ cm$^{-3}$ of material in from the upstream.
+An important first step when running grid simulations is to ascertain an acceptable resolution to use. Figure~\ref{figRE_neres1000} shows the approximate steady-state value of \netarget for different resolutions. The choice of resolution has to take into account the accuracy of the output and the time taken to receive said output. It is clear that \netg is tending towards a real value at infinite resolution, and the percentage changes between increasing resolutions are shown in table~\ref{tabsol1dres}. Given that the number of operations performed by the code scales as approximately $N^2$, for $N$ cells, increasing the cell number heavily increases the computing cost. Table~\ref{tabsol1dres} contains run times at different resolutions, and shows a stark increase in time for increasing resolution. The second run, at \neus $= 1.25\e{19}$ cm$^{-3}$, completed significantly faster than the first run because it was restarted from the near steady-state snapshot at the end of the first run. Therefore, each simulation time step is completed faster because the system is already rather stable, and only needs to accommodate an injection of an extra $0.25\e{19}$ cm$^{-3}$ of material into the upstream.
 
 \begin{table}[]
-%\centering
-\caption{SOL1D simulation run times and percentage change in }
-\label{tabsol1dres}
-\begin{tabular}{l|l|l|l|l|l}
-\multicolumn{1}{l|}{\multirow{2}{*}{}} & \multicolumn{3}{l}{Time taken to complete 1000 time steps}    \\ \cline{2-3} 
- \multicolumn{1}{l|}{Resolution}        & \multicolumn{1}{l|}{\neus = $1.0$} & \multicolumn{1}{l|}{\neus = $1.25$}  & \netg & \% change  \\ \hline
-                   200                 &      47m 44s          &    24m 23s         &  put    &  -    \\
-                   400                 &      1h 48m 55s       &    2h 45m 4s       &  values & 5.0   \\
-                   600                 &      7h 40m 57s       &    5h 5m 4s        &  in     & 1.6   \\
-                   800                 &      13h 18m 55s      &    7h 1m 28s       &  here   & 0.58  \\
-                  1000                 &                   &                        & *value* & 0.42
-\end{tabular}
+	%\centering
+	\caption{SOL1D simulation run times and percentage change in }
+	\label{tabsol1dres}
+	\begin{tabular}{l|l|l|l|l|l}
+		\multicolumn{1}{l|}{\multirow{2}{*}{}} & \multicolumn{3}{l}{Time taken to complete 1000 time steps}    \\ \cline{2-3} 
+		\multicolumn{1}{l|}{Resolution}        & \multicolumn{1}{l|}{\neus = $1.0$} & \multicolumn{1}{l|}{\neus = $1.25$}  & \netg & \% change  \\ \hline
+		200                 &      47m 44s          &    24m 23s         &  put    &  -    \\
+		400                 &      1h 48m 55s       &    2h 45m 4s       &  values & 5.0   \\
+		600                 &      7h 40m 57s       &    5h 5m 4s        &  in     & 1.6   \\
+		800                 &      13h 18m 55s      &    7h 1m 28s       &  here   & 0.58  \\
+		1000                &                       &                    & *value* & 0.42
+	\end{tabular}
 \end{table}
 
 \begin{figure}
-\includegraphics[scale=0.48]{Figures/sol1d/RE_neres1000.png}
-\centering
-\caption{Density at sheath, \netg, at approximately steady-state for different y-axis resolutions in SOL1D.}\label{figRE_neres1000}
+	\includegraphics[scale=0.48]{Figures/sol1d/RE_neres1000.png}
+	\centering
+	\caption{Density at sheath, \netg, at approximately steady-state for different y-axis resolutions in SOL1D.}\label{figRE_neres1000}
 \end{figure}
 
 Detachment can be seen occurring when examining the density profiles of different simulations, figure~\ref{figneprofneusALLtriang} shows systems in varying states of detachment caused by differing set upstream densities. Although the precise point at which an attached system becomes detached can be debated. Panel a) shows an attached system, and even the higher resolution cases struggle to resolve the density profile close to the target, which is why the profiles are very jagged. Panel b) displays a detached system: the density profile peak has shifted away from the target plate somewhat, cooling the divertor surface. The density profile in panel c) is also detached from the target, but more so than in panel b), as although the profile shape adjacent to the target is a similar shape the peak has shifted toward the upstream. Once the density profile has retreated from the target it is much more easily resolved, as the peak is spread over many more cells than when it sits close to the surface. However, the low resolution case, with 200 cells along the y-axis, still struggles to produce a smooth profile close to the plate even when the system is quite detached. 
 
 \begin{figure}
-\includegraphics[scale=0.7]{Figures/sol1d/neprofneusALLtriang.png}
+\includegraphics[scale=0.8]{Figures/sol1d/neprofneusALLtriang.png}
 \centering
-\caption{Density profile close to target for y-axis resolutions 200, 400, 600 \& 800 cells at different set values of \neus in SOL1D.}\label{figneprofneusALLtriang}
+\caption{Density profile close to target for y-axis resolutions 200, 400, 600 \& 800 cells at different set values of \neus in SOL1D. The y-axes show the density, with units [1\e{20} cm\pow{-3}] and the x-axes show the distance to the outboard midplane in metres. Panel a) has set upstream density of \noNe{2}, panel b) was run with \neus = \noNe{2.5} and c) with \noNe{3}}\label{figneprofneusALLtriang}
 \end{figure}
 
 These density profiles in figure~\ref{figneprofneusALLtriang} provide further evidence of the necessity of using a high enough resolution in grid-based simulations. The difference between the red (800 y-axis cells) and green (600) profiles is small compared to that with blue (400) or black (200), hence a resolution of 600 cells along the y-axis seems to attain sufficiently accurate results. Unless otherwise stated, subsequent SOL1D results were taken from simulations with ny = 600 cells.
 
+
+SOL1D excels as a fast 1-dimensional simulator and includes important underlying processes such as 3-body recombination, on top of expected contributions to plasma dynamics, for example impurity radiation and momentum transfer between plasma and neutrals. However, the model is missing detailed cross field transport, which is only applicable in 2-dimensional models; only an estimate for non-parallel plasma transport can be made in a 1D simulation. Furthermore, both 2 and 1D models cannot include turbulence effects, which are likely to play a role in detachment stability in real machines. Another key factor not implemented in SOL1D is impurity transport. Impurities are present as a fraction of plasma density, and evolving the impurity density profile may reduce the stability of detachment if the impurities are transported towards the upstream by interactions with the plasma \cite{Nakazawa2000}.
+
+\section{Results and Analysis}\label{secResults}
+\subsection{SOL1D}\label{ssecSOL1D}
 \subsubsection{Temperature comparison}\label{sssectempcomp}
 Two key parameters to be analysed are the upstream and target temperatures, \Tus and \Ttg. The whole point of divertor detachment is to reduce the power flux impacting on the divertor. \Ttg sets the voltage across the sheath, which in turn influences the velocity of ions impacting on the solid divertor target (ions in the simulation have a fixed velocity when entering the sheath - the Bohm velocity). The lower \Ttg, the less damage will be done to the divertor plates. Figure~\ref{figTT_IMPCOMBO2} shows the difference between \Tus and \Ttg for different \neus values at each of the resolutions in table~\ref{tabsol1dres}. When looking to reduce \Ttg, the trade off is the corresponding fall in \Tus. As the upstream is at the SOL midplane, any changes there will be translated directly into the main plasma. 
 
-Similarly shaped temperature profiles are observed for all resolutions in figure~\ref{figTT_IMPCOMBO2}, \Tus falls slowly while \Ttg falls rapidly with increasing \neus, until above $2.25\e{19}$ cm$^{-3}$ when it starts to fall extremely fast. At this point, the density profile has pulled away from the divertor and this extra density flooding into the upstream is reducing the temperature there. If an operational 'sweet-spot' exists, then it is in the range $2\e{19}$ cm$^{-3}$ < \neus < $2.25\e{19}$ cm$^{-3}$, as here \Ttg has practically reached it's lower limit while \Tus is still quite high.
+Similarly shaped temperature profiles are observed for all resolutions in figure~\ref{figTT_IMPCOMBO2}, \Tus falls slowly while \Ttg falls rapidly with increasing \neus, until above $2.25\e{19}$ cm$^{-3}$ when it starts to fall extremely fast. At this point, the density profile has pulled away from the divertor and this extra density flooding into the upstream reduces the temperature there. The range $2\e{19}$ cm$^{-3}$ \textless~\neus \textless~$2.25\e{19}$ cm$^{-3}$ defines a good operational window, as here \Ttg has practically reached it's lower limit while \Tus is still quite high. The power flux input used in these simulations, 20 MW m\pow{-2}, is quite low in comparison to most machines. Therefore this window of operation is likely to be shifted to higher upstream densities on these machines.
 
 \begin{figure}
 \includegraphics[scale=0.5]{Figures/sol1d/TT_IMPCOMBO2.png}
@@ -244,7 +268,7 @@ Neutrals recombining from the target and walls and entering the divertor leg tra
 
 
 \subsection{Energy Transfer}\label{ssecEtrans}
-Plasma-neutral energy transfer through charge exchange shows some interesting changes as the system detaches from the target plates. Pre-detachment, the plasma loses energy to the neutrals when hot ions pick up electrons from a colder neutrals, producing hot neutrals and cold ions. In the midst of detaching the ions and neutrals alternate being hottest in distinct regions, from the target plate to 2 metres into the upstream, seen in figure~\ref{figbalEcx19m}. Electron heat transport is quick so they are cooled fastest further away from the plates during detachment. When charge exchange occurs, the ion temperature, $T_i$, is effectively swapped for the neutral temperature, $T_n$. Ions and electrons are strongly coupled in SOL1D, $T_i = T_e$, therefore; the more cool electrons that permeate into the upstream, the more charge exchange reactions will be swapping cold $T_e$ for hotter $T_n$.
+Plasma-neutral energy transfer through charge exchange shows some interesting changes as the system detaches from the target plates. Pre-detachment, the plasma loses energy to the neutrals when hot ions pick up electrons from a colder neutrals, producing hot neutrals and cold ions. In the midst of detaching, the ions and neutrals alternate being hottest in distinct regions, from the target plate to 2 metres into the upstream, shown by the black curves in figure~\ref{figbalEcx19m} at \neus = \noNe{2.4}. Electron heat transport is rapid, so they are cooled fastest further away from the plates during detachment. When charge exchange occurs, the ion temperature, $T_i$, is effectively swapped for the neutral temperature, $T_n$. Ions and electrons are strongly coupled in SOL1D, $T_i = T_e$, therefore; the more cool electrons that permeate into the upstream, the more charge exchange reactions will be swapping cold $T_e$ for hotter $T_n$.
 
 \begin{figure}
 \includegraphics[scale=0.7]{Figures/sol1d/balEcx19m.png}
@@ -289,9 +313,9 @@ The extended divertor leg in the SXD geometry enables simulations to settle down
 
 
 \subsection{Neutral Loss}\label{ssecNloss}
-Rate of neutral loss in the divertor leg can vary largely depending on their interaction mean free path, $\lambda_{mfp}$. If $\lambda_{mfp}$ becomes comparable to the width of the plasma channel in the leg then neutral lifetime in the plasma will become very short \textbf{(what can cause $\lambda_{mfp}$ to change?)}. In SOL1D, the rate of neutral loss is called $nloss$ and was set to $1\e{3}$ s\pow{-1} for all previous simulations. 
+Rate of neutral loss, $nloss$, in the divertor leg can vary largely depending on their interaction mean free path, $\lambda_{mfp}$. If $\lambda_{mfp}$ becomes comparable to the width of the plasma channel in the leg then neutral lifetime in the plasma will become very short \textbf{(what can cause $\lambda_{mfp}$ to change?)}. We set neutral loss rate to $1\e{3}$ s\pow{-1} for all previous simulations. Increasing \neus initially increases $j_{sat~tg}$, as the ion flux to the target is higher. However, once detachment begins, ion density near the target starts to fall as the plasma density profile shifts away from the divertor plate. This leads to the roll-over region in the $j_{sat~tg}$ profile, as $j_{sat~tg} \approx nv_{i~tg}$, the plasma flux at the target.
 
-Using the super-X geometry, nloss was varied between 1\e{3} and 1\e{5} s\pow{-1}. Saturation current density at the sheath, $j_{sat~tg}$, was plotted against upstream density at various values to provide the $j_{sat~tg}$ profiles shown in figure~\ref{fignloss1e345,52.5e425_2}. Increasing nloss has a stark effect on the roll over region of the $j_{sat~tg}$ profile, it moves to higher density as nloss increases. The initial $j_{sat~tg}$ gradient changes significantly with nloss. At nloss = $1\e{4}$ s\pow{-1} the gradient grows initially and then decreases when detachment starts and $j_{sat~tg}$ rolls over. In contrast, the $j_{sat~tg}$ profile gradients for the higher nloss runs are always decreasing even at low \neus. 
+Using the super-X geometry, $nloss$ was varied between 1\e{3} and 1\e{5} s\pow{-1}. Saturation current density at the sheath, $j_{sat~tg}$, was plotted against upstream density at various values to provide the $j_{sat~tg}$ profiles shown in figure~\ref{fignloss1e345,52.5e425_2}. Increasing $nloss$ has a stark effect on the roll over region of the $j_{sat~tg}$ profile, it moves to higher density as $nloss$ increases. The initial $j_{sat~tg}$ gradient changes significantly with $nloss$. At loss rate $1\e{4}$ s\pow{-1} the gradient grows initially, then decreases when detachment starts and $j_{sat~tg}$ begins to fall. In contrast, the $j_{sat~tg}$ profile gradients for the higher $nloss$ runs are always decreasing even at low \neus. 
 
 \begin{figure}
 \includegraphics[scale=0.5]{Figures/sol1d/nloss1e345,525e425_2.png}
@@ -299,8 +323,7 @@ Using the super-X geometry, nloss was varied between 1\e{3} and 1\e{5} s\pow{-1}
 \caption{Saturation current density at the sheath, $j_{sat~tg}$ vs. upstream density, \neus, at different neutral lifetimes, nloss. Nloss has units of [s\pow{-1}]. SXD geometry was used for all simulations here.}\label{fignloss1e345,52.5e425_2}
 \end{figure}
 
-
-Several lower density simulations failed at all values of nloss, which is likely due to particles leaving the system too quickly for the density controller in the upstream to adjust. Once a lot of particles leave the system, because the power input stays the same, the overall temperature increases. Ion velocity into the sheath is set to the sound speed, and $v_S \propto \sqrt{T}$, so the rate of particles leaving the system into the sheath increases. This produces a vicious cycle as the temperature keeps increasing while more particles leave the system, and particles leave the plasma faster the higher the temperature.
+Several lower density simulations failed at all values of $nloss$, which is likely due to particles leaving the system too quickly for the density controller in the upstream to adjust. Once a lot of particles leave the system, because the power input stays the same, the overall temperature increases. Ion velocity into the sheath is set to the sound speed, and $v_S \propto \sqrt{T}$, so the rate of particles leaving the system into the sheath increases. This produces a vicious cycle as the temperature keeps increasing while more particles leave the system, and particles leave the plasma faster the higher the temperature. Further work could be done to try to stabilise the failed low density, high $nloss$ simulations in order to better understand the relationship between neutral loss rate and $j_{sat~tg}$ in the ramp up phase.
 
 
 Experimentally one would expect...\textbf{Bruce's TCV results go here}
