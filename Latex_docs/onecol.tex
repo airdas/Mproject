@@ -139,7 +139,7 @@ This means and infinite temperature gradient would produce infinitely fast heat 
 
 > Many problems arise when attempting to control the stability of detachment in experiments \cite{Lipschultz2016}, which ideally aim to fix the low temperature and pressure detached region between the X-point and target, in order to prevent it impacting on core performance.
 
-> Detachment reduces the compression of impurities in the divertor region \cite{Bosh2001} so impurity transport during detachment requires further analysis.
+> Detachment reduces the compression of impurities in the divertor region \cite{Bosch2001} so impurity transport during detachment requires further analysis.
 
 
 We first investigate how SOL1D, a one dimensional fluid equation code, deals with detachment and confirm that factors influencing detachment in experiment and other simulations have similar effects on the state of detachment. Following this, the underlying processes causing detachment are examined in an effort to better understand this phenomenon which is likely to prove vital for future high power tokamaks. Detachment stability is very susceptible to upstream variation and other external factors, for example upstream density and impurity fraction \cite{Lipschultz2016}, and needs better understanding before detachment can be successfully controlled throughout a range of operating scenarios in ITER and other future machines. 
@@ -164,16 +164,16 @@ An important first step when running grid simulations is to ascertain an accepta
 
 \begin{table}[]
 	%\centering
-	\caption{SOL1D simulation run times and percentage change in }
+	\caption{SOL1D simulation run times, using 8 cores, and percentage change in \netg value for different y-axis resolutions, ny.}
 	\label{tabsol1dres}
 	\begin{tabular}{l|l|l|l|l|l}
 		\multicolumn{1}{l|}{\multirow{2}{*}{}} & \multicolumn{3}{l}{Time taken to complete 1000 time steps}    \\ \cline{2-3} 
 		\multicolumn{1}{l|}{Resolution}        & \multicolumn{1}{l|}{\neus = $1.0$} & \multicolumn{1}{l|}{\neus = $1.25$}  & \netg & \% change  \\ \hline
-		200                 &      47m 44s          &    24m 23s         &  put    &  -    \\
-		400                 &      1h 48m 55s       &    2h 45m 4s       &  values & 5.0   \\
-		600                 &      7h 40m 57s       &    5h 5m 4s        &  in     & 1.6   \\
-		800                 &      13h 18m 55s      &    7h 1m 28s       &  here   & 0.58  \\
-		1000                &                       &                    & *value* & 0.42
+		200                 &      47m 44s          &    24m 23s         &  0.2540 &  -    \\
+		400                 &      1h 48m 55s       &    2h 45m 4s       &  0.2674 & 5.0   \\
+		600                 &      7h 40m 57s       &    5h 5m 4s        &  0.2718 & 1.6   \\
+		800                 &      13h 18m 55s      &    7h 1m 28s       &  0.2734 & 0.6  \\
+		1000                &   \textgreater~30h    &       N/A          &  0.2745 & 0.4
 	\end{tabular}
 \end{table}
 
@@ -197,9 +197,9 @@ These density profiles in figure~\ref{figneprofneusALLtriang} provide further ev
 SOL1D excels as a fast 1-dimensional simulator and includes important underlying processes such as 3-body recombination, on top of expected contributions to plasma dynamics, for example impurity radiation and momentum transfer between plasma and neutrals. However, the model is missing detailed cross field transport, which is only applicable in 2-dimensional models; only an estimate for non-parallel plasma transport can be made in a 1D simulation. Furthermore, both 2 and 1D models cannot include turbulence effects, which are likely to play a role in detachment stability in real machines. Another key factor not implemented in SOL1D is impurity transport. Impurities are present as a fraction of plasma density, and evolving the impurity density profile may reduce the stability of detachment if the impurities are transported towards the upstream by interactions with the plasma \cite{Nakazawa2000}.
 
 \section{Results and Analysis}\label{secResults}
-\subsection{SOL1D}\label{ssecSOL1D}
-\subsubsection{Temperature comparison}\label{sssectempcomp}
-Two key parameters to be analysed are the upstream and target temperatures, \Tus and \Ttg. The whole point of divertor detachment is to reduce the power flux impacting on the divertor. \Ttg sets the voltage across the sheath, which in turn influences the velocity of ions impacting on the solid divertor target (ions in the simulation have a fixed velocity when entering the sheath - the Bohm velocity). The lower \Ttg, the less damage will be done to the divertor plates. Figure~\ref{figTT_IMPCOMBO2} shows the difference between \Tus and \Ttg for different \neus values at each of the resolutions in table~\ref{tabsol1dres}. When looking to reduce \Ttg, the trade off is the corresponding fall in \Tus. As the upstream is at the SOL midplane, any changes there will be translated directly into the main plasma. 
+%\subsection{SOL1D}\label{ssecSOL1D}
+\subsection{Temperature comparison}\label{ssectempcomp}
+Two key parameters to be analysed are the upstream and target temperatures, \Tus and \Ttg. The purpose of divertor detachment is to reduce the power flux impacting on the divertor. \Ttg sets the voltage across the sheath, which in turn influences the velocity of ions impacting on the solid divertor target (ions in the simulation have a fixed velocity when entering the sheath - the Bohm velocity). The lower \Ttg, the less damage will be done to the divertor plates. Figure~\ref{figTT_IMPCOMBO2} shows the difference between \Tus and \Ttg for different \neus values at each of the resolutions in table~\ref{tabsol1dres}. When looking to reduce \Ttg, the trade off is the corresponding fall in \Tus. As the upstream is at the SOL midplane, any changes there will be translated directly into the main plasma. 
 
 Similarly shaped temperature profiles are observed for all resolutions in figure~\ref{figTT_IMPCOMBO2}, \Tus falls slowly while \Ttg falls rapidly with increasing \neus, until above $2.25\e{19}$ cm$^{-3}$ when it starts to fall extremely fast. At this point, the density profile has pulled away from the divertor and this extra density flooding into the upstream reduces the temperature there. The range $2\e{19}$ cm$^{-3}$ \textless~\neus \textless~$2.25\e{19}$ cm$^{-3}$ defines a good operational window, as here \Ttg has practically reached it's lower limit while \Tus is still quite high. The power flux input used in these simulations, 20 MW m\pow{-2}, is quite low in comparison to most machines. Therefore this window of operation is likely to be shifted to higher upstream densities on these machines.
 
@@ -209,7 +209,9 @@ Similarly shaped temperature profiles are observed for all resolutions in figure
 \caption{Comparison of $T_{upstream}$ and $T_{target}$ at varying set $n_{e~upstream}$ for different y-axis resolutions in SOL1D}\label{figTT_IMPCOMBO2}
 \end{figure}
 
-Simulations from \noNe{3} onwards shown in figure~\ref{figTT_IMPCOMBO2} are detaching and reattaching in quick succession, so they are unlikely to approach a steady state within a reasonable number of timesteps. When detached, the upstream temperatures in these simulations follow the downward trend observed with increasing \neus. However, when the system destabilises and rushes to reattach to the target plates, the upstream temperature shoots up. If these higher density simulations are terminated during a period of detachment, \Tus will be low, as is the case for all the \noNe{3.75} runs. Conversely, if they are terminated when the density profile has reattached, \Tus will be much higher, which can be seen in the data points at \noNe{3.5} for ny = 400 \& 600 cells. This cyclical detachment and reattachment is portrayed in figure~\ref{figny400800r35netg} - here \netg is observed following a pattern of peaks (when system is attached to the target) and troughs (when the system is detached). In the case of the black line, with y-axis resolution of 400 cells, the simulation has completed when the sheath density is still far higher than its minimum value, so the density profile is still in the process of detaching from the target surface. Consequently, the upstream temperature is still relatively quite high. The red line is from a simulation with the same input values but using 800 cells along the y-axis, here termination has occurred when the density profile is almost fully detached from the target, hence the upstream temperature is quite low. This termination snapshot effect can be seen in figure~\ref{figTT_IMPCOMBO2} at \noNe{3.5}, where the upstream temperature with 400 cells is much higher than that for 800 cells.
+Simulations from \noNe{3} onwards shown in figure~\ref{figTT_IMPCOMBO2} are detaching and reattaching in quick succession, so they are unlikely to approach a steady state within a reasonable number of timesteps. When detached, the upstream temperatures in these simulations follow the downward trend observed with increasing \neus. However, when the system destabilises and rushes to reattach to the target plates, the upstream temperature shoots up. If these higher density simulations are terminated during a period of detachment, \Tus will be low, as is the case for all the \noNe{3.75} runs. Conversely, if they are terminated when the density profile has reattached, \Tus will be much higher, which can be seen in the data points at \noNe{3.5} for ny = 400 \& 600 cells. 
+
+This cyclical detachment and reattachment is portrayed in figure~\ref{figny400800r35netg} - here sheath density, \netg, is observed following a pattern of peaks (when system is attached to the target) and troughs (when the system is detached). In the case of the black line, with y-axis resolution of 400 cells, the simulation has stopped when the sheath density is still far higher than its minimum value, so the density profile is still in the process of detaching from the target surface. Consequently, the upstream temperature is still relatively quite high. The red line is from a simulation with the same input values but using 800 cells along the y-axis, here termination has occurred when the density profile is almost fully detached from the target, hence the upstream temperature is quite low. This termination snapshot effect can be seen in figure~\ref{figTT_IMPCOMBO2} at \noNe{3.5}, where the upstream temperature with 400 cells is much higher than that for 800 cells.
 
 \begin{figure}
 \includegraphics[scale=0.5]{Figures/sol1d/ny400800r35netg.png}
@@ -218,10 +220,11 @@ Simulations from \noNe{3} onwards shown in figure~\ref{figTT_IMPCOMBO2} are deta
 \end{figure}
 
 
-\subsubsection{Pressure Loss}\label{sssecPloss}
-Pressure ratio $2\frac{P_{tg}}{P_{us}}$ was calculated for the density scan data with different resolutions and plotted against target plate temperature in figure~\ref{figPL_IMPCOMBO2logy}; the data from varied resolutions show good agreement. Experimentally, pressure loss ratio saturates to unity at high target temperatures due to the relation between static and dynamic (?) pressure (maths is on p18 of lab book) and falls as \Ttg decreases after the system has started to detach. Experimental pressure loss data is displayed in figure~\ref{figPlossAlcator}. The sharp drop in pressure loss ratio below 3 eV is thought to be caused by atomic effects which become relevant at those lower temperatures \cite{Pitcher1997}.
 
-Pressure loss saturation is not observed in the simulations shown in figure~\ref{figPL_IMPCOMBO2logy}, and this discrepancy is expected to be due to the way ion viscosity is handled in the system. Ion viscosity varies like $\eta_i \propto \tau_i T \propto T^(\frac{5}{2}$, where $\tau_i$ is the ion collision time, hence this term in the overall viscosity equation is likely to blow up at higher temperatures, which would lead to the lack of saturation seen here. 
+\subsection{Pressure Loss}\label{ssecPloss}
+Pressure ratio $2\frac{P_{tg}}{P_{us}}$ was calculated for the density scan data with different resolutions and plotted against target plate temperature in figure~\ref{figPL_IMPCOMBO2logy}; the data from varied resolutions show good agreement. Experimentally, pressure loss ratio saturates to unity at high target temperatures due to the relation between static and dynamic pressure and falls as \Ttg decreases, after the system has started to detach. Experimental pressure loss data from Alcator C-Mod is displayed in figure~\ref{figPlossAlcator}. The sharp drop in pressure loss ratio below 3 eV is thought to be caused by atomic effects which become relevant at those lower temperatures \cite{Pitcher1997}.
+
+Pressure loss saturation is not observed in the simulations shown in figure~\ref{figPL_IMPCOMBO2logy}, and this discrepancy is expected to be due to the way ion viscosity is handled in the model. Ion viscosity varies like $\eta_i \propto \tau_i T \propto T^{\frac{5}{2}}$, where $\tau_i$ is the ion collision time, hence this term in the overall viscosity equation is likely to blow up at higher temperatures, which would lead to the lack of saturation seen here. 
 
 \begin{figure}
 \includegraphics[scale=0.5]{Figures/sol1d/PL_IMPCOMBO2logy.png}
@@ -232,15 +235,31 @@ Pressure loss saturation is not observed in the simulations shown in figure~\ref
 \begin{figure}
 \includegraphics[scale=0.7]{Figures/PlossAlcator.png}
 \centering
-\caption{Pressure loss ratio, $\frac{2P_{tg}}{P_{us}}$, data from Alcator C-Mod \cite{Lipschultz2007}.}\label{figPlossAlcator}
+\caption{Pressure loss ratio, $\frac{2P_{tg}}{P_{us}}$, against divertor plate temperature. Data from Alcator C-Mod \cite{Lipschultz2007}.}\label{figPlossAlcator}
 \end{figure}
 
-SOL pressure is a combination of the static thermal pressure and the dynamic pressure, which is due to the motion of the ions. Pressure loss between the upstream and the target is caused by the friction between the plasma and the neutrals. In much of the SOL, the thermal velocity is greater than the ion velocity, so $P_{static} >> P_{dynamic}$. However, at the sheath, ion velocity is equal to the sound speed, making the two pressures equal. As \neus increases, so does pressure loss, because a larger number of particles in the same volume leads to greater friction between the plasma and neutrals.
+SOL pressure is a combination of the static thermal pressure and the dynamic pressure, which is due to the motion of the ions. Pressure loss between the upstream and the target is caused by the friction between the plasma and the neutrals. In much of the SOL, the thermal velocity is greater than the ion velocity, so $P_{static}~\gg~P_{dynamic}$. However, at the sheath, ion velocity is equal to the sound speed, making the two pressures equal. As \neus increases, so does pressure loss, because a larger number of particles in the same volume leads to greater friction between the plasma and neutrals.
+
+
+\subsection{Ion Viscosity}\label{ssecIonviscosity}
+To study the lack of saturation at higher \Ttg values, seen in figure~\ref{figPL_IMPCOMBO2logy}, simulations were run ignoring the effects of ion viscosity, $\eta_i$, in the system. As discussed in section~\ref{sssecPloss}, $\eta_i$ varies with $T^{5/2}$, so it is likely to blow up at high temperatures. When removing the effects of ion viscosity, the saturation observed experimentally is seen in the simulation data, which is shown in figure~\ref{figPL_iVpts}. Ignoring ion viscosity results in higher average ion velocity in the target area and hence higher target temperature, which is the drawback to removing these effects from the system. Another drawback is that these simulations take significantly longer to reach near steady-state conditions, as ion viscosity is a large contributor to damping in the system.
+
+A possible method of retaining the pressure loss saturation alongside viscous ion properties would be to introduce a flux limiter into the SOL1D framework. The current heat flux model \cite{Braginskii1965} fails to come close to the real value at high temperature gradients, because it approximates heat flux as varying linearly with $\nabla T$ which misses the asymptote at $q_max$. This limit exists because heat in a system cannot flow faster than the electron thermal velocity.
+
+\begin{figure}
+	\includegraphics[scale=0.5]{Figures/sol1d/PL_iVpts.png}
+	\centering
+	\caption{Pressure loss data with and without the effects of ion viscosity, $\eta_i$, the inclusion of which prevents pressure loss saturation at higher \Ttg. This comparison was run in conventional divertor geometry.}\label{figPL_iVpts}
+\end{figure}
+
+Free-streaming thermal conductivity provides a better model of plasma heat flow, and is implemented in the Hermes 2D code. \textbf{trying to port this into sol1d}
+
+The extended divertor leg in the SXD geometry enables simulations to settle down far quicker than in the CD set up, as the power input (at the midplane) is much farther removed from the complicated and delicately balanced interactions at the target. 
 
 
 
-\subsubsection{Radiated Power}\label{sssecRpower}
-SOL1D considers three types of radiated power: radiation due to impurities, Rzrad; due to ionisation, Riz and due to recombination, Rrec, which are combined to give total radiated power, R. An interesting quantity calculated from these three sources is the radiated power flux at a given time point in a simulation. This is given in equation~\ref{eqRpflux}, where $e$ is the charge of an electron, $\omega_{ci}$ is the ion cyclotron frequency, $dy$ is the simulation cell spacing and $\hat{N}$ and $\hat{T}$ are constants in the simulation given in the appendix. 
+\subsection{Radiated Power}\label{ssecRpower}
+SOL1D considers three types of radiated power: radiation due to impurities, Rzrad; due to ionisation, Riz and due to recombination, Rrec, which are combined to give total radiated power, R. An interesting quantity calculated from these three sources is the radiated power flux, $ \hat{P}/A $, at a given time point in a simulation. This is given in equation~\ref{eqRpflux}, where $e$ is the charge of an electron, $\omega_{ci}$ is the ion cyclotron frequency and $dy$ is the simulation cell spacing. $\hat{N}$ and $\hat{T}$ are density and temperature normalisation factors, and $ A $ is the cross sectional area of the flux tube. We analysed the data of the blue curve in figure~\ref{figTT_IMPCOMBO2} in this radiation section. 
 
 \begin{equation}\label{eqRpflux}
 \hat{P}/A = (R~e~\hat{N}~\hat{T}~\omega_{ci}) \times dy
@@ -249,12 +268,12 @@ SOL1D considers three types of radiated power: radiation due to impurities, Rzra
 \begin{figure}
 \includegraphics[scale=0.5]{Figures/sol1d/PRbar600.png}
 \centering
-\caption{Different sources of radiated power at varying set upstream density in SOL1D, with ny = 600 cells. The horizontal line shows the power flux entering the system.}\label{figPRbar600}
+\caption{Different sources of radiated power at varying set upstream density in SOL1D, with ny = 600 cells. The horizontal line shows the upstream power flux input.}\label{figPRbar600}
 \end{figure}
 
-Radiated power flux as a fraction of power flux input is expected to be lower at smaller values of \neus because system temperature is higher overall, and most species are fully ionised. This is observed in figure~\ref{figPRbar600}, as well as the expected radiated power increase as \neus increases and the system undergoes detachment, reducing the average temperature. As the temperature falls, more species begin to recombine, especially carbon initially. This is why an increase in radiation due to impurities, Rzrad, is observed up to a density of \noNe{2.5}, because carbon can recombine at higher temperatures than the other plasma species, providing significant power loss via Bremsstrahlung and energy level transitions.
+Radiated power flux as a fraction of power flux input is expected to be lower at smaller values of \neus because system temperature is higher overall, and most plasma species are fully ionised. This is observed in figure~\ref{figPRbar600}, along with more power radiated as \neus increases and the system undergoes detachment, reducing the average temperature, a trend which can be seen in figure~\ref{figTT_IMPCOMBO2}. As the temperature falls, more species begin to recombine, especially the carbon impurities. This is why an increase in radiation due to impurities, Rzrad, is observed up to a density of \noNe{2.5}, because carbon can recombine at higher temperatures than the other plasma species, providing significant power loss via Bremsstrahlung and energy level transitions.
 
-Several of the higher \neus instances in figure~\ref{figPRbar600} show the system radiating more power than it receives. Neutrals formed in SOL1D come off the walls with a certain energy which is then transferred to the plasma. Hence, if enough neutrals transfer their energy to the plasma in one time step, the total power radiated can exceed the power input.
+Several of the higher \neus runs in figure~\ref{figPRbar600} show the system radiating more power than it receives. Neutrals formed in SOL1D come off the walls with a certain energy which is then transferred to the plasma. Hence, if enough neutrals transfer their energy to the plasma in one time step, the total power radiated can exceed the power input.
 
 
 \subsection{Particle Transfer}\label{ssecPtrans}
@@ -277,39 +296,23 @@ Plasma-neutral energy transfer through charge exchange shows some interesting ch
 \end{figure}
 
 
-\subsubsection{Super-X Geometry}\label{sssecSXG}
-Until now, the SOL1D simulations performed have used an arbitrary geometry and parameters (25m long field line and uniform B-field). Future simulations aim to emulate behaviour of MAST-Upgrade, which has just installed a Super-X divertor (SXD) in place of it's previous conventional divertor (CD); the differences between the two can be seen in figure~\ref{figCDvsSXD}. In the SXD geometry, the distance from the X-point to the target is much longer than the CD set up. Additionally, extra magnetic coils have been added into the nose of the bulkhead seen extending towards the X-point, which further separate the cold divertor plasma from the bulk plasma. These factors allow a greater tolerance when implementing conditions to achieve detachment, as changes in the divertor region are not transmitted as quickly or with the same magnitude as with the CD geometry.
+
+\subsection{Super-X Geometry}\label{ssecSXG}
+Until now, the SOL1D simulations performed have used a standard divertor geometry and parameters (25m long field line and uniform B-field). Future simulations aim to emulate behaviour of MAST-Upgrade, which has just installed a Super-X divertor (SXD) in place of it's previous conventional divertor (CD); the differences between the two can be seen in figure~\ref{figCDvsSXD}. In the SXD geometry, the distance from the X-point to the target is much longer than the CD set up. Additionally, extra magnetic coils have been added into the nose of the bulkhead seen extending towards the X-point, which further separate the cold divertor plasma from the bulk plasma. These factors allow a greater tolerance when implementing conditions to achieve detachment, as changes in the divertor region are not transmitted as quickly or with the same magnitude as with the CD geometry.
 
 \begin{figure}
 \includegraphics[scale=0.5]{Figures/CDvsSXD.png}
 \centering
-\caption{A comparison of the Super-X Divertor (SXD) and the Conventional Divertor (CD) geometries on MAST \cite{Havlickova2014}.}\label{figCDvsSXD}
+\caption{A comparison of the Super-X Divertor (SXD) and the Conventional Divertor (CD) geometries on MAST \cite{Havlickova2014}. The y-axis, z, is the height in metres and R is the major radius, in metres.}\label{figCDvsSXD}
 \end{figure}
 
-Implementing this new geometry requires estimating how the magnetic field changes over the length of the field line. This is entered into the simulations by changing the Area Expansion Ratio (AER), which describes how the cross section of a flux tube changes as it traverses the length of the field line. A distance of $0.05$ m out from the separatrix into the SOL was used, thus by using the third panel in figure~\ref{figMASTUdesignpapersFig2} the AER is estimated to be 12. Furthermore, the connection length of the field line between the X-point and the target is estimated as $26$ m, from the second panel. The connection length between the outboard midplane and the X-point is $5$ m \cite{Fishpool2013}, making the total length of the simulation y-axis $31$ m.
+Implementing this new geometry requires estimating how the magnetic field changes over the length of the field line. This is entered into the simulations by changing the Area Expansion Ratio (AER), which describes how the cross section of a flux tube changes as it traverses the length of the field line. A distance of $0.005$ m out from the separatrix into the SOL was used, thus by using the third panel in figure~\ref{figMASTUdesignpapersFig2} the AER is estimated to be 12. Furthermore, the connection length of the field line between the X-point and the target is estimated as $26$ m, from the second panel in figure~\ref{figMASTUdesignpapersFig2}. The connection length between the outboard midplane and the X-point is $5$ m \cite{Fishpool2013}, making the total length of the simulation y-axis $31$ m. The fourth panel in figure~\ref{figMASTUdesignpapersFig2} shows the distribution of connection length, for a field line 0.01 m into the separatrix, between the midplane and the target plates \cite{Fishpool2013}. The first pane in figure~\ref{figMASTUdesignpapersFig2} shows the divertor leg footprints for each configuration.
 
 \begin{figure}
-\includegraphics[scale=0.75]{Figures/MASTUdesignpapersFig2.png}
+\includegraphics[scale=0.75]{Figures/MASTUdesignpapersFig2_2.png}
 \centering
-\caption{Representative magnetic equilibria with full toroidal field (0.8T vacuum at R=0.8m) showing conventional (black), expanded strike point (red) and Super-X like long connection length (blue) divertor geometries on MAST \cite{Fishpool2013}. \textbf{add in lines at 0.005 m to make the choice of Connection Length and Area Expansion v obvious.}}\label{figMASTUdesignpapersFig2}
+\caption{Representative magnetic equilibria with full toroidal field (0.8T vacuum at R=0.8m) showing conventional (black), expanded strike point (red) and Super-X like long connection length (blue) divertor geometries on MAST \cite{Fishpool2013}. Z is height, R is major radius, $ R_{sep} $ is the radius from the machine centre to a point in the separatrix, so $ R - R_{sep} $ is a distance from the plasma edge into the separatrix. The pink lines on panels 2 and 3 highlight our choice of connection length and area expansion for the SXD geometry.}\label{figMASTUdesignpapersFig2}
 \end{figure}
-
-
-\subsubsection{Ion Viscosity}\label{sssecIonviscosity}
-To study the lack of saturation at higher \Ttg values, seen in figure~\ref{figPL_IMPCOMBO2logy}, simulations were run neglecting ion viscosity, $\eta_i$, in the system. As discussed in section~\ref{sssecPloss}, $\eta_i$ varies with $T^{5/2}$, so it is likely to blow up at high temperatures. When removing the effects of ion viscosity, the saturation observed experimentally is seen in the simulation data, which is shown in figure~\ref{figPL_iVpts}. Ignoring ion viscosity results in higher average ion velocity in the target area and hence higher target temperature, which is the drawback to removing these effects from the system. Another drawback is that these simulations take significantly longer to reach near steady-state conditions, as ion viscosity is a large contributor to damping in the system.
-
-A possible method of retaining the pressure loss saturation alongside viscous ion properties would be to introduce a flux limiter into the SOL1D framework. The current heat flux model \cite{Braginskii1965} fails to get close to the real value at high temperature gradients, because it approximates heat flux as varying linearly with $\nabla T$ which misses the asymptote at $q_max$. This limit exists because heat in a system cannot flow faster than the electron thermal velocity in that system.
-
-\begin{figure}
-\includegraphics[scale=0.5]{Figures/sol1d/PL_iVpts.png}
-\centering
-\caption{Pressure loss data with and without the effects of ion viscosity, $\eta_i$, the inclusion of which prevents pressure loss saturation at higher \Ttg. This comparison was run in conventional divertor geometry.}\label{figPL_iVpts}
-\end{figure}
-
-Free-streaming thermal conductivity provides a better model of plasma heat flow, and is implemented in the Hermes 2D code. \textbf{trying to port this into sol1d}
-
-The extended divertor leg in the SXD geometry enables simulations to settle down far quicker than in the CD set up, as the power input (at the midplane) is much farther removed from the complicated and delicately balanced interactions at the target. 
-
 
 
 \subsection{Neutral Loss}\label{ssecNloss}
@@ -326,11 +329,6 @@ Using the super-X geometry, $nloss$ was varied between 1\e{3} and 1\e{5} s\pow{-
 Several lower density simulations failed at all values of $nloss$, which is likely due to particles leaving the system too quickly for the density controller in the upstream to adjust. Once a lot of particles leave the system, because the power input stays the same, the overall temperature increases. Ion velocity into the sheath is set to the sound speed, and $v_S \propto \sqrt{T}$, so the rate of particles leaving the system into the sheath increases. This produces a vicious cycle as the temperature keeps increasing while more particles leave the system, and particles leave the plasma faster the higher the temperature. Further work could be done to try to stabilise the failed low density, high $nloss$ simulations in order to better understand the relationship between neutral loss rate and $j_{sat~tg}$ in the ramp up phase.
 
 
-Experimentally one would expect...\textbf{Bruce's TCV results go here}
-
-
-
-
 
 \subsection{Impurity Fraction}\label{ssecImpfrac}
 Impurity fraction in the divertor heavily influences the amount of power lost to radiation, as impurities are a largest contributor to volumetric radiative power loss in a hydrogenic plasma. SOL1D takes an input that sets the percentage of carbon impurity in the system. Figure~\ref{figCvarPL5nes} shows the pressure loss ratio at different impurity fractions and upstream densities against the target temperature. Interestingly, all the profiles follow the same overall curve, which suggests that pressure loss is a function of the energy loss, because increasing the impurity fraction does not add any more friction to the system. Therefore, the additional loss of pressure as the percentage of carbon goes up is due to the extra energy loss from impurity radiation.
@@ -343,7 +341,7 @@ Impurity fraction in the divertor heavily influences the amount of power lost to
 
 Examining the spread of values at each \neus in figure~\ref{figCvarPL5nes}, impurity fraction has an increasing affect on the pressure loss as \neus increases. At the lowest upstream density the effect of increasing the carbon fraction does not lead to any significant change in the progress of detachment. Following a 50\% density increase to \noNe{1.5}, the carbon fraction change causes a fivefold wider \Ttg spread, and this range is at least as wide again for \noNe{2}. A higher \neus at fixed power input leads to a lower overall temperature, which in turn leads to more radiative energy loss as more ions, hydrogenic and carbon, recombine with electrons which then transition to lower atomic electron levels, radiating away more energy. Carbon in the plasma itself does not introduce extra friction to cause the observed loss of pressure, however; as the average temperature falls, friction between the plasma and neutrals will increase. This is because neutral penetration will extend further into the upstream as temperature drops, detailed in section~\ref{ssecPtrans}, due to the fact that their ionisation mean free path is longer.
 
-Near 4 eV in figure~\ref{figCvarPL5nes} lie points from the red, blue and purple sets, showing that system state over large density gaps can be bridged simply by varying impurity fraction. Here, the blue (\noNe{2}) point is with 1\% impurity concentration, which is the same data in figure~\ref{figTT_IMPCOMBO2}, and is at the beginning of detachment. Hence the overlapping point from the \noNe{1.5} set, 2\% carbon, has been brought to the cusp of detachment, compared to the same density in figure~\ref{figTT_IMPCOMBO2}, by doubling the impurity fraction. The purple point here is at 0.5\% carbon, highlighting that just half a percent less impurities in a plasma can bring it from complete detachment (see \neus = \noNe{2.7} points in figure~\ref{figTT_IMPCOMBO2}) to a position where detachment is only just beginning.
+Near 4 eV in figure~\ref{figCvarPL5nes} lie points from the red, blue and purple sets, showing that system state over large density gaps can be bridged simply by varying impurity fraction. Here, the blue (\neus = \noNe{2}) point has 1\% impurity concentration, which is the same data as the blue point at the same density in figure~\ref{figTT_IMPCOMBO2}, and is at the beginning of detachment. Hence the overlapping point from the \noNe{1.5} set, 2\% carbon, has been brought to the cusp of detachment, compared to the same density in figure~\ref{figTT_IMPCOMBO2}, by doubling the impurity fraction. The purple point here is at 0.5\% carbon, highlighting that just half a percent lower impurity concentration in a plasma can bring it from complete detachment (see \neus = \noNe{2.7} points in figure~\ref{figTT_IMPCOMBO2}) to a position where detachment is only just beginning.
 
 \begin{figure}
 \includegraphics[scale=0.5]{Figures/sol1d/CvarTR5nes.png}
@@ -360,6 +358,14 @@ Near 4 eV in figure~\ref{figCvarPL5nes} lie points from the red, blue and purple
 Figure~\ref{figCvarTR5nes} shows the temperature ratio, \Ttg/\Tus, and is supported by figure~\ref{figCvarTus}, allowing changes in temperature ratio to be more easily understood. Maintaining a target temperature below 5 eV over a whole shot cycle in a tokamak will require careful control of several parameters which influence the SOL temperature profile. Reducing \Ttg quickly affects \Tus, which directly influences core plasma temperature and fusion performance. An approximate guide for minimum acceptable \Tus is estimated as 90\% of the \neus = \noNe{1} run with 0\% impurities, the first black point in figure~\ref{figCvarTus}, which is 38.2 eV. 
 
 Higher upstream densities require lower impurity levels to bring \Ttg below the required temperature. Successful operation can be achieved at the different densities as follows. At the lowest density examined here, \noNe{1}, carbon percentage will need to be increased further, above 2\%, beyond the scope of this group of simulations. The danger in doing this is the transport of impurities into the core, which can lead to catastrophic Bremsstrahlung energy losses if uncontrolled. For \noNe{1.5}, an accelerating \Ttg decrease, falling threefold over the impurity fraction range, is accompanied by little reduction of \Tus. The window of acceptable carbon percentage shrinks as \neus increases, figure~\ref{figPRbar600} shows that power radiated by impurities quickly swamps all other loss terms as density is increased.
+
+\textbf{Extra detail on \neus = 2.4 case}
+> separate fig. of Tus and Ttg at different \%C 
+
+> Compare peak positions for each impurity level
+
+> Show extent of detachment that 0 to 2\% impurity brings
+ls -lt
 
 
 
