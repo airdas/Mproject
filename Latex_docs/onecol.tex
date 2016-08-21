@@ -359,13 +359,32 @@ Figure~\ref{figCvarTR5nes} shows the temperature ratio, \Ttg/\Tus, and is suppor
 
 Higher upstream densities require lower impurity levels to bring \Ttg below the required temperature. Successful operation can be achieved at the different densities as follows. At the lowest density examined here, \noNe{1}, carbon percentage will need to be increased further, above 2\%, beyond the scope of this group of simulations. The danger in doing this is the transport of impurities into the core, which can lead to catastrophic Bremsstrahlung energy losses if uncontrolled. For \noNe{1.5}, an accelerating \Ttg decrease, falling threefold over the impurity fraction range, is accompanied by little reduction of \Tus. The window of acceptable carbon percentage shrinks as \neus increases, figure~\ref{figPRbar600} shows that power radiated by impurities quickly swamps all other loss terms as density is increased.
 
-\textbf{Extra detail on \neus = 2.4 case}
+\textbf{Extra detail on \neus = 2.0 case}
 > separate fig. of Tus and Ttg at different \%C 
 
 > Compare peak positions for each impurity level
 
 > Show extent of detachment that 0 to 2\% impurity brings
-ls -lt
+
+We focused on one set of the impurity fraction data, that at \neus = \noNe{2}. Figures~\ref{figCvarTRne2} and \ref{figCvarPMne2} show the \Tus and \Ttg data for this case and the density profile peak position respectively. From pure hydrogenic plasma to 1.2\% impurity fraction, as the power radiated by impurities increases the target temperature falls steadily and drops below the 5 eV threshold for long term operation. The window from about 0.85\% to 1.2\% produces the desired \Ttg while retaining a sufficiently high \Tus so as not to hinder core plasma performance significantly. Within this window however, the density profile peak has remained attached to the divertor plate, as figure~\ref{figCvarPMne2} shows. Perhaps a divertor set up could be devised with a carefully controlled impurity population such that it can be held in a \textit{just} attached scenario. In this case the impurity fraction would radiate sufficient power to give an acceptable \Ttg, and progress of the detachment peak need not be closely controlled, as is the worry for the success of detachment in many machines, simply because the plasma in the divertor remains attached. However, after modelling and experimentally measuring impurity transport in the divertor region, strictly controlling the impurity population there may be an unrealistic goal.
+
+Sudden detaching at impurity concentrations above 1.2\% cause a rapid drop in \Tus to such levels as could hinder core temperature. More study should be focused on this small region to better visualise and understand the effect on density peak position and upstream temperature as the plasma detaches from the plate.
+
+\begin{figure}
+	\includegraphics[scale=0.5]{Figures/sol1d/CvarTRne2.png}
+	\centering
+	\caption{Target and upstream temperature against impurity fraction, at \neus = \noNe{2} in CD geometry.}\label{figCvarTRne2}
+\end{figure}
+
+
+
+\begin{figure}
+	\includegraphics[scale=0.5]{Figures/sol1d/CvarPMne2.png}
+	\centering
+	\caption{Distance of density peak to the X-point in metres at different impurity fractions, \neus = \noNe{2} in CD geometry.}\label{figCvarPMne2}
+\end{figure}
+
+
 
 
 
@@ -376,6 +395,11 @@ Successful operation of a tokamak relies on prolonged health of the divertor pla
 - Applicability of Detachment in areas other than fusion: Coronal Loops exhibiting detachment (need to flick through the 2 papers I have on this topic) 
 Prominences: A. De Groof, et al, A\&A 443, 319–328 (2005)
 Coronal Rain: P. Antolin et al, 280 (2012) 457.
+
+
+
+
+
 
 
 
