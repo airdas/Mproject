@@ -129,11 +129,22 @@ The plasma pressure, $ p $, is evolved according to equation~\ref{eqPressure}. H
 At the target, normal sheath boundary conditions are applied, meaning the ion velocity when entering the sheath is at least the sound speed, $ V_{\parallel}^{sheath} \geq C_s$. Particles enter the upstream at such a rate as to keep the upstream density constant, as specified in the input file. However, the particles are placed into the upstream so as not to affect parallel conservation of mass, momentum or energy ($ \partial_{\parallel}n =0, V_{\parallel} =0, \partial_{\parallel}p =0 $). Additionally, the model assumes local ambipolarity, meaning that the parallel current density, $j_{\parallel}$, throughout the 1D system is zero. 
 
 - 2 Point Model (section 5.4 in Stangeby)\\
-The simplest model of the divertor leg is the two-point model, which looks at the differences between the upstream, point one, and the target, point two. Given that the main aim of SOL modelling is to seek ways to reduce the extremely high fluxes at the upstream before they reach the target, for simple analysis only the effect on the target of upstream variations need to be noted. Neutrals are recycled from the divertor plate into a thin layer in front of the target, where they are ionised and subsequently impact the target again. This cycle repeats indefinitely and so the only plasma flow in this model occurs in the thin layer adjacent to the target where the recycled neutrals are ionised.
+The simplest model of the divertor leg is the two-point model, which only considers differences between the upstream and target. Given that the main aim of SOL modelling is to seek ways to reduce the extremely high fluxes at the upstream before they reach the target, for simple analysis only the effect on the target of upstream variations need to be noted. This model is often used to analyse experimental data, as taking measurements between the upstream and the target can be rather difficult. It incorporates the idea of pressure balance, that the total pressure is the sum of the static and dynamic pressures:
 
-b) has 3 equations containing 3 unknowns: \netg, \Ttg and \Tus, because \neus and $q_{\parallel}$ are independent variables in any tokamak, these equations are derived as steady-state versions of equations~\ref{eqDensity},\ref{eqMomentum} and \ref{eqPressure}.
+\begin{equation}\label{eqPbal}
+p_{tot} = p_{static} + p_{dynamic} = 2nkT + mnv^2.
+\end{equation}
 
+Using the velocity boundary conditions of $ v_u=0 $ at the upstream and $ v_t=(2kT_t/m)^{1/2} $, the sound speed, equation~\ref{eqPus_tg} is derived. This shows the relationship between upstream and target pressure.
 
+\begin{equation}\label{eqPus_tg}
+n_uT_u = 2n_tT_t
+\end{equation}
+
+- Applicability of Detachment in areas other than fusion: Coronal Loops exhibiting detachment (need to flick through the 2 papers I have on this topic) 
+Prominences: A. De Groof, et al, A \& A 443, 319–328 (2005)
+
+Coronal Rain: P. Antolin et al, 280 (2012) 457.
 
 
 We first investigate how SOL1D, a one dimensional fluid equation code, deals with detachment and confirm that factors influencing detachment in experiment and other simulations have similar effects on the state of detachment. Following this, the underlying processes causing detachment are examined in an effort to better understand this phenomenon which is likely to prove vital for future high power tokamaks. Detachment stability is very susceptible to upstream variation and other external factors, for example upstream density and impurity fraction \cite{Lipschultz2016}, and needs better understanding before detachment can be successfully controlled throughout a range of operating scenarios in ITER and other future machines. 
@@ -271,10 +282,10 @@ Several of the higher \neus runs in figure~\ref{figPRbar600} show the system rad
 
 
 \subsection{Particle Transfer}\label{ssecPtrans}
-Neutrals recombining from the target and walls and entering the divertor leg travel into the upstream until they are ionised. Spatial variation of the neutral sink by ionisation is strongly coupled to the position of the density profile peak as detachment progresses. This can be seen in figure~\ref{figbalSizthick20m}, where the vertical dashed lines show the electron density profile peak position at different stages of detachment. Neutrals' ionisation mean free paths lengthen as the overall SOL temperature falls because their atomic electrons are less likely to be given sufficient energy to overcome the ionisation barrier.
+Neutrals recombining from the target and walls and entering the divertor leg travel into the upstream until they are ionised. The position of the density profile peak is strongly coupled to spatial variation of the neutral sink by ionisation as detachment progresses. This can be seen in figure~\ref{figbalSizthick20m}, where the vertical dashed lines show the electron density profile peak position at different stages of detachment. Neutrals' ionisation mean free paths lengthen as the overall SOL temperature falls because their atomic electrons are less likely to be given sufficient energy to overcome the ionisation barrier.
 
 \begin{figure}
-\includegraphics[scale=0.7]{Figures/sol1d/balSizthick20m.png}
+\includegraphics[scale=0.5]{Figures/sol1d/balSizthick20m.png}
 \centering
 \caption{Spatial distribution of particle transfer through ionisation. All solid lines are negative, which shows neutrals becoming ions, and dashed vertical lines show the position of the corresponding electron density peak.}\label{figbalSizthick20m}
 \end{figure}
@@ -284,7 +295,7 @@ Neutrals recombining from the target and walls and entering the divertor leg tra
 Plasma-neutral energy transfer through charge exchange shows some interesting changes as the system detaches from the target plates. Pre-detachment, the plasma loses energy to the neutrals when hot ions pick up electrons from a colder neutrals, producing hot neutrals and cold ions. In the midst of detaching, the ions and neutrals alternate being hottest in distinct regions, from the target plate to 2 metres into the upstream, shown by the black curves in figure~\ref{figbalEcx19m} at \neus = \noNe{2.4}. Electron heat transport is rapid, so they are cooled fastest further away from the plates during detachment. When charge exchange occurs, the ion temperature, $T_i$, is effectively swapped for the neutral temperature, $T_n$. Ions and electrons are strongly coupled in SOL1D, $T_i = T_e$, therefore; the more cool electrons that permeate into the upstream, the more charge exchange reactions will be swapping cold $T_e$ for hotter $T_n$.
 
 \begin{figure}
-\includegraphics[scale=0.7]{Figures/sol1d/balEcx19m.png}
+\includegraphics[scale=0.5]{Figures/sol1d/balEcx19m.png}
 \centering
 \caption{Spatial distribution of energy transfer via charge exchange in CD geometry. Solid lines represent energy being lost to the neutrals by the plasma, while dotted lines show regions where neutrals transfer energy to the plasma.}\label{figbalEcx19m}
 \end{figure}
@@ -353,26 +364,15 @@ Figure~\ref{figCvarTR5nes} shows the temperature ratio, \Ttg/\Tus, and is suppor
 
 Higher upstream densities require lower impurity levels to bring \Ttg below the required temperature. Successful operation can be achieved at the different densities as follows. At the lowest density examined here, \noNe{1}, carbon percentage will need to be increased further, above 2\%, beyond the scope of this group of simulations. The danger in doing this is the transport of impurities into the core, which can lead to catastrophic Bremsstrahlung energy losses if uncontrolled. For \noNe{1.5}, an accelerating \Ttg decrease, falling threefold over the impurity fraction range, is accompanied by little reduction of \Tus. The window of acceptable carbon percentage shrinks as \neus increases, figure~\ref{figPRbar600} shows that power radiated by impurities quickly swamps all other loss terms as density is increased.
 
+We focused on one set of the impurity fraction data, that at \neus = \noNe{2}.  Figures~\ref{figCvarTRne2} and \ref{figCvarPMne2} show the \Tus and \Ttg data for this case and the density profile peak position respectively. From pure hydrogenic plasma to 1.2\% impurity fraction, as the power radiated by impurities increases the target temperature falls steadily and drops below the 5 eV threshold for long term operation. The window from about 0.85\% to 1.2\% produces the desired \Ttg while retaining a sufficiently high \Tus so as not to hinder core plasma performance significantly. Within this window however, the density profile peak has remained attached to the divertor plate, as figure~\ref{figCvarPMne2} shows. Perhaps a divertor set up could be devised with a carefully controlled impurity population such that it can be held in a \textit{just} attached scenario. In this case the impurity fraction would radiate sufficient power to give an acceptable \Ttg, and progress of the detachment peak need not be closely controlled, as is the worry for the success of detachment in many machines, simply because the plasma in the divertor remains attached. However, after modelling and experimentally measuring impurity transport in the divertor region, strictly controlling the impurity population there may be an unrealistic goal. It has been shown that detachment reduces the compression of impurities in the divertor region \cite{Bosch2001}, so impurity transport during detachment does require further analysis.
 
-
-\textbf{Extra detail on \neus = 2.0 case}
-> separate fig. of Tus and Ttg at different \%C 
-
-> Compare peak positions for each impurity level
-
-> Show extent of detachment that 0 to 2\% impurity brings
-
-We focused on one set of the impurity fraction data, that at \neus = \noNe{2}. Figures~\ref{figCvarTRne2} and \ref{figCvarPMne2} show the \Tus and \Ttg data for this case and the density profile peak position respectively. From pure hydrogenic plasma to 1.2\% impurity fraction, as the power radiated by impurities increases the target temperature falls steadily and drops below the 5 eV threshold for long term operation. The window from about 0.85\% to 1.2\% produces the desired \Ttg while retaining a sufficiently high \Tus so as not to hinder core plasma performance significantly. Within this window however, the density profile peak has remained attached to the divertor plate, as figure~\ref{figCvarPMne2} shows. Perhaps a divertor set up could be devised with a carefully controlled impurity population such that it can be held in a \textit{just} attached scenario. In this case the impurity fraction would radiate sufficient power to give an acceptable \Ttg, and progress of the detachment peak need not be closely controlled, as is the worry for the success of detachment in many machines, simply because the plasma in the divertor remains attached. However, after modelling and experimentally measuring impurity transport in the divertor region, strictly controlling the impurity population there may be an unrealistic goal. It has been shown that detachment reduces the compression of impurities in the divertor region \cite{Bosch2001}, so impurity transport during detachment does require further analysis.
-
-Sudden detaching at impurity concentrations above 1.2\% cause a rapid drop in \Tus to such levels as could hinder core temperature. More study should be focused on this small region to better visualise and understand the effect on density peak position and upstream temperature as the plasma detaches from the plate.
+Sudden detaching at impurity concentrations above 1.2\% cause a rapid drop in \Tus to such levels as could hinder core temperature. More study should be focused on this small region to better visualise and understand the effect on density peak position and upstream temperature as the plasma detaches from the plate. For ITER's operation, divertor impurity seeding will be necessary to reduce divertor heat fluxes by facilitating detachment \cite{Kallenbach2013}.
 
 \begin{figure}
 	\includegraphics[scale=0.5]{Figures/sol1d/CvarTRne2.png}
 	\centering
 	\caption{Target and upstream temperature against impurity fraction, at \neus = \noNe{2} in CD geometry.}\label{figCvarTRne2}
 \end{figure}
-
-
 
 \begin{figure}
 	\includegraphics[scale=0.5]{Figures/sol1d/CvarPMne2.png}
@@ -385,23 +385,7 @@ Sudden detaching at impurity concentrations above 1.2\% cause a rapid drop in \T
 
 
 \section{Conclusion}\label{secConclusion}
-\textit{remember conclusion needs to be concise}
-\textbf{Revise/remove: Successful operation of a tokamak relies on prolonged health of the divertor plates which must be obtained through mitigation of the continual bombardment by energetic plasma species. Sufficiently powerful machines will require automatic divertor heat flux reduction from the outset.} The interrelations between the parameters which influence divertor temperature must be extensively understood to decide on the optimal configuration for operation. OPERATIONAL WINDOWS
-
-
-- Applicability of Detachment in areas other than fusion: Coronal Loops exhibiting detachment (need to flick through the 2 papers I have on this topic) 
-Prominences: A. De Groof, et al, A\&A 443, 319–328 (2005)
-Coronal Rain: P. Antolin et al, 280 (2012) 457.
-
-
-
-
-
-
-
-
-
-
+Power production in fusion power plants after ITER, DEMO and beyond, will most likely increase \cite{Federici2014}, and with that the power entering the SOL will continue to increase. Consequently, the only option to ensure the viability of current divertor designs in these machines, is to develop a concrete understanding of the physics behind detachment. Only then can its stability be ensured and fusion power can begin to challenge current energy production methods. Analysis of the processes causing detachment was made, such as the spatial distribution of plasma particle sinks, and energy and momentum transfer in charge exchange reactions near the divertor plate. The effects of upstream density and impurity fraction on detachment were highlighted, in particular how operating in a controlled range of these parameters could allow the position of the detachment front to be strictly controlled, while retaining a sufficiently cold target for prolonged operation. Further research should be conducted into these operating windows, first using 2D simulations to include cross field transport and to consider detachment at both the inner and outer divertor plates. Following this, 3D simulations should be conducted to assess the effects of turbulence and toroidal asymmetries, before translating the findings into experimental design, where the windows of operation can be more rigorously tested.
 
 
 
