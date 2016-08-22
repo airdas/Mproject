@@ -83,8 +83,6 @@ Magnetic fusion devices, specifically tokamaks, produce large amounts of power w
 
 Heat fluxes entering the scrape-off layer (SOL) in current tokamaks are mitigated by several methods including neutral gas puffing and angular offsetting the divertor plates to spread the flux over a wider area. In ITER, the SOL heat flux will be far higher, around 1 GW m\pow{-2} \cite{Loarte2007}, undermining the capability of present cooling methods. This will expose the divertor plates to minimum flux of 10 MW m\pow{-2} during normal operation, with peak power fluxes during ELMs of twice that amount \cite{Loarte2007}; heat fluxes below 10 MW m\pow{-2} are required by current materials. This high power flux is unavoidable, as $ P_{SOL} \approx 100$ MW, the power entering the SOL, is fixed, and the SOL heat channel is estimated to be around 1 mm \cite{Eich2013}, and depends on factors innate to reactor design. Since these high heat fluxes entering the SOL cannot be changed, ways must be found to reduce them throughout the divertor region.
 
--*********- Short literature review ***********************
-
 Detachment is loosely defined as when the target temperature falls below 5 eV \cite{Porter1996}, and the upstream temperature no longer dictates \Ttg. Attached plasmas are characterised by high target densities, ion current and target temperature. Detachment initiates steep drops in \Ttg, \netarget and ion current to the divertor sheath (or target plate) \cite{Stacey2001}, as well as extensive parallel pressure loss from the target toward the upstream \cite{Nakazawa2000}. Many problems arise when attempting to control the stability of detachment in experiments \cite{Lipschultz2016}, which ideally aim to fix the low temperature and pressure detached region between the X-point and target, in order to prevent it impacting on core performance. More detailed understanding of the processes behind detachment is needed in order to decide how best to control its stability in current and future tokamaks \cite{Reimold2015}.
 
 We investigate Super-X divertor (SXD) geometry, as well as conventional divertor (CD) geometry, as the extended SXD leg is thought to allow more control over the extent of detachment \cite{Valanju2009}. Divertor geometry has been shown in simulation and experiment to have large effects on the extent of detachment over a variety of operating conditions \cite{Pitts2001}. Linear plasma devices have been used to simulate divertor detachment \cite{Nishijima2002, Ohno2002}, as changes to tokamak divertors are costly both monetarily and in time.
@@ -109,7 +107,7 @@ Momentum evolution, described in equation~\ref{eqMomentum}, evolves the balance 
 The plasma pressure, $ p $, is evolved according to equation~\ref{eqPressure}. Here, $ E $ is the plasma energy sink to neutrals, $ R $ is the plasma energy sink by radiative losses and $ S_p $ is the external source of pressure. Plasma temperature is assumed to be uniform, $ T_i = T_e $.
 
   \begin{equation}\label{eqPressure}
-  \frac{\partial}{\partial t}(\frac{3}{2}p) = -\nabla.q + V_{\parallel} \partial_{\parallel}p -E - R + S_p
+  \frac{\partial}{\partial t}\left( \frac{3}{2}p\right)  = -\nabla.q + V_{\parallel} \partial_{\parallel}p -E - R + S_p
   \end{equation}
 
 
@@ -132,10 +130,10 @@ Using the velocity boundary conditions of $ v_u=0 $ at the upstream and $ v_t=(2
   n_uT_u = 2n_tT_t
   \end{equation}
 
-- Applicability of Detachment in areas other than fusion: Coronal Loops exhibiting detachment (need to flick through the 2 papers I have on this topic) 
-Prominences: A. De Groof, et al, A \& A 443, 319–328 (2005)
+\textbf{DESIRABLE ADDITIONS - Applicability of Detachment in areas other than fusion: Coronal Loops exhibiting detachment (need to flick through the 2 papers I have on this topic) 
+Prominences: A. De Groof, et al, A and A 443, 319–328 (2005)}\\
 
-Coronal Rain: P. Antolin et al, 280 (2012) 457.
+\textbf{Coronal Rain: P. Antolin et al, 280 (2012) 457.}\\
 
 
 We first investigate how SOL1D, a one dimensional fluid equation code, deals with detachment and confirm that factors influencing detachment in experiment and other simulations have similar effects on the state of detachment. Following this, the underlying processes causing detachment are examined in an effort to better understand this phenomenon which is likely to prove vital for future high power tokamaks. Detachment stability is very susceptible to upstream variation and other external factors, for example upstream density and impurity fraction \cite{Lipschultz2016}, and needs better understanding before detachment can be successfully controlled throughout a range of operating scenarios in ITER and other future machines. 
@@ -368,12 +366,8 @@ Sudden detaching at impurity concentrations above 1.2\% cause a rapid drop in \T
 
 
 
-
-
 \section{Conclusion}\label{secConclusion}
 Power production in fusion power plants after ITER, DEMO and beyond, will most likely increase \cite{Federici2014}, and with that the power entering the SOL will continue to increase. Consequently, the only option to ensure the viability of current divertor designs in these machines, is to develop a concrete understanding of the physics behind detachment. Only then can its stability be ensured and fusion power can begin to challenge current energy production methods. Analysis of the processes causing detachment was made, such as the spatial distribution of plasma particle sinks, and energy and momentum transfer in charge exchange reactions near the divertor plate. The effects of upstream density and impurity fraction on detachment were highlighted, in particular how operating in a controlled range of these parameters could allow the position of the detachment front to be strictly controlled, while retaining a sufficiently cold target for prolonged operation. Further research should be conducted into these operating windows, first using 2D simulations to include cross field transport and to consider detachment at both the inner and outer divertor plates. Following this, 3D simulations should be conducted to assess the effects of turbulence and toroidal asymmetries, before translating the findings into experimental design, where the windows of operation can be more rigorously tested.
-
-
 
 
 \printbibliography
