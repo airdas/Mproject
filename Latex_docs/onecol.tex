@@ -83,63 +83,57 @@
 \section{Background}\label{secBg}
 Brief overview of the importance of detachment for ITER and future tokamaks.
 - Current material limit
-Heat fluxes entering the scrape-off layer (SOL) in current tokamaks are mitigated by several methods including neutral gas puffing and angular offsetting the divertor plates to spread the flux over a wider area. In ITER, the SOL heat flux will be far higher, around 1 GW m\pow{-2} \cite{Loarte2007}, reducing the capability of present cooling methods. This will expose the divertor plates to minimum 10 MW m\pow{-2} during normal operation, with peak power fluxes during ELMs of twice that amount \cite{Loarte2007}; heat fluxes below 10 MW m\pow{-2} are required by current materials. This high power flux is unavoidable, as $ P_{SOL} \approx 100$ MW, the power entering the SOL, is fixed, and the SOL heat channel is estimated to be around 1 mm \cite{Eich2013}, and depends on factors innate to reactor design. Since these high heat fluxes entering the SOL cannot be changed, ways must be found to reduce them throughout the divertor region.
+Heat fluxes entering the scrape-off layer (SOL) in current tokamaks are mitigated by several methods including neutral gas puffing and angular offsetting the divertor plates to spread the flux over a wider area. In ITER, the SOL heat flux will be far higher, around 1 GW m\pow{-2} \cite{Loarte2007}, undermining the capability of present cooling methods. This will expose the divertor plates to minimum flux of 10 MW m\pow{-2} during normal operation, with peak power fluxes during ELMs of twice that amount \cite{Loarte2007}; heat fluxes below 10 MW m\pow{-2} are required by current materials. This high power flux is unavoidable, as $ P_{SOL} \approx 100$ MW, the power entering the SOL, is fixed, and the SOL heat channel is estimated to be around 1 mm \cite{Eich2013}, and depends on factors innate to reactor design. Since these high heat fluxes entering the SOL cannot be changed, ways must be found to reduce them throughout the divertor region.
 
 - Divertor geometries (conventional, super-X, snowflake)
 
+- Pressure loss (1997Pitcher review of Experimental Divertor physics - p 45)
 
-- SOL1D geometry: a field line in the separatrix from the outboard midplane to the divertor plate, stretched out into a straight line. The section between midplane and X-point is where heat and particles enter the system from the core plasma; no heat enters between the X-point and the target, and particles only enter this region when they are recycled from the walls.
+-*********- Short literature review ***********************
 
-- Equations SOL1D is built on (fluid model)\\
-a) In order to study detachment, and volumetric processes along the whole length of the SOL, such as friction between plasma and neutral flows, the evolution of the properties of the divertor plasma must be known. Parallel transport in a plasma, following the direction of the magnetic field, is well understood. Therefore producing a 1-dimensional model of the SOL does not require a great deal of complexity past the 1D fluid equations. These equations are derived from integrals of successive moments of the 1D Fokker-Planck kinetic vector equation \cite{Stangeby}.
+Detachment is loosely defined as when the target temperature falls below 5 eV \cite{Porter1996}, and the upstream temperature no longer dictates \Ttg. Attached plasmas are characterised by high target densities, ion current and target temperature. Detachment initiates steep drops in \Ttg, \netarget and ion current to the divertor sheath (or target plate) \cite{Stacey2001}, as well as extensive parallel pressure loss from the target toward the upstream \cite{Nakazawa2000}. Many problems arise when attempting to control the stability of detachment in experiments \cite{Lipschultz2016}, which ideally aim to fix the low temperature and pressure detached region between the X-point and target, in order to prevent it impacting on core performance. More detailed understanding of the processes behind detachment is needed in order to decide how best to control its stability in current and future tokamaks \cite{Reimold2015}.
+
+We investigate Super-X divertor (SXD) geometry, as well as conventional divertor (CD) geometry, as the extended SXD leg is thought to allow more control over the extent of detachment \cite{Valanju2009}. Divertor geometry has been shown in simulation and experiment to have large effects on the extent of detachment over a variety of operating conditions \cite{Pitts2001}. Linear plasma devices have been used to simulate divertor detachment \cite{Nishijima2002, Ohno2002}, as changes to tokamak divertors are costly both monetarily and in time.
+
+
+- Heat Flow (Braginskii vs Free Streaming) - Flux Limiter
+
+Classical ion heat transport, $q_{\parallel}$, is proportional to the temperature gradient, $\nabla T$, in the SOL and is known as the Braginskii heat flux relation \citep{Braginskii1965}. This model works well at low temperatures and when the collisional mean free path is short compared to the system's scale lengths. Alternatively it assumes that particles undergo frequent collisions. However, when $\nabla T$ is very high, the scale length over which the temperature changes by a large amount (a system scale length) becomes fairly close to the size of the collisional mean free path. Consequently, the model over estimates the heat flux at high $\nabla T$ because some particles' collision lengths are very large, and hence they travel most of the SOL unhindered, meaning the model breaks down because particles do not experience frequent collisions.
+
+The Braginskii model would produce infinitely fast heat conduction with an infinite temperature gradient. Clearly this is not possible, given that the plasma species, which are the conductors, have finite speeds. The thermal electron velocity sets the upper limit on heat transport in a real plasma, as heat cannot travel faster than the fastest particles. The free-streaming heat flux model includes this limit, and is therefore more apt to describe heat transport in a plasma model.
+
+
+SOL1D models a field line in the separatrix from the outboard midplane to the divertor plate, stretched out into a straight line. The section between midplane and X-point is where heat and particles enter the system from the core plasma; no heat enters between the X-point and the target, and particles only enter this region when they are recycled from the walls.
+
+In order to study detachment, and volumetric processes along the whole length of the SOL, such as friction between plasma and neutral flows, the evolution of the properties of the divertor plasma must be known. Parallel transport in a plasma, following the direction of the magnetic field, is well understood. Therefore producing a 1-dimensional model of the SOL does not require a great deal of complexity past the 1D fluid equations. These equations are derived from integrals of successive moments of the 1D Fokker-Planck kinetic vector equation \cite{Stangeby}.
 
 \begin{equation}\label{eqDensity}
 \frac{\partial n}{\partial t} = -\nabla . (\textbf{b}V_{\parallel}n) + S_n - S
 \end{equation}
-b) Plasma density is evolved as in equation~\ref{eqDensity} where $S_n$ is the external source of plasma ions and $S=R_rec - R_iz$ (recombination rate minus ionisation rate) is the net recombination of plasma particles, or a source of neutrals. The variation of plasma density at a given region depends on the rate of plasma particles leaving that point, the source of plasma particles to the area, and the net conversion of plasma to neutrals in that region.
+
+Plasma density is evolved as in equation~\ref{eqDensity} where $S_n$ is the external source of plasma ions and $S=R_{rec} - R_{iz}$ (recombination rate minus ionisation rate) is the net recombination of plasma particles, or a source of neutrals. The variation of plasma density at a given region depends on the rate of plasma particles leaving that point, the source of plasma particles to the area, and the net conversion of plasma to neutrals in that region.
 
 \begin{equation}\label{eqMomentum}
 \frac{\partial}{\partial t}(m_i n V_{\parallel}) = -\nabla . (m_i n V_{\parallel} \textbf{b} V_{\parallel}) + \partial_{\parallel}p - F
 \end{equation}
 
-c) Momentum evolution, described in equation~\ref{eqMomentum}, evolves the balance between the plasma flow momentum, $m_inV_{\parallel}\textbf{b}V_{\parallel}$ where $\textbf{b}$ is the unit vector in the direction of the magnetic field, and the parallel pressure, with the addition of F as the loss of momentum of the ions due to recombination and charge exchange. The plasma flow momentum term is an average over the fluid, whereas $\partial_{\parallel}p$ is part of the inertia of the plasma.
+Momentum evolution, described in equation~\ref{eqMomentum}, evolves the balance between the plasma flow momentum, $m_inV_{\parallel}\textbf{b}V_{\parallel}$ where $\textbf{b}$ is the unit vector in the direction of the magnetic field, and the parallel pressure, with the addition of F as the loss of momentum of the ions due to recombination and charge exchange. The plasma flow momentum term is an average over the fluid, whereas $\partial_{\parallel}p$ is part of the inertia of the plasma.
 
-d) Energy 
-$S_p$ is a source of pressure, E
+The plasma pressure, $ p $, is evolved according to equation~\ref{eqPressure}. Here, $ E $ is the plasma energy sink to neutrals, $ R $ is the plasma energy sink by radiative losses and $ S_p $ is the external source of pressure. Plasma temperature is assumed to be uniform, $ T_i = T_e $.
 
-e) Boundary conditions: particles enter the upstream at such a rate as to keep the upstream density constant
+\begin{equation}\label{eqPressure}
+\frac{\partial}{\partial t}(\frac{3}{2}p) = -\nabla.q + V_{\parallel} \partial_{\parallel}p -E - R + S_p
+\end{equation}
 
 
-Additionally, the model assumes local ambipolarity, meaning that the parallel current density, $j_{\parallel}$ throughout the 1D system is zero. 
+At the target, normal sheath boundary conditions are applied, meaning the ion velocity when entering the sheath is at least the sound speed, $ V_{\parallel}^{sheath} \geq C_s$. Particles enter the upstream at such a rate as to keep the upstream density constant, as specified in the input file. However, the particles are placed into the upstream so as not to affect parallel conservation of mass, momentum or energy ($ \partial_{\parallel}n =0, V_{\parallel} =0, \partial_{\parallel}p =0 $). Additionally, the model assumes local ambipolarity, meaning that the parallel current density, $j_{\parallel}$, throughout the 1D system is zero. 
 
 - 2 Point Model (section 5.4 in Stangeby)\\
-a) The simplest model of the divertor leg is the two-point model, which looks at the differences between the upstream, point one, and the target, point two. Given that the main aim of SOL modelling is to seek ways to reduce the extremely high fluxes at the upstream before they reach the target, for simple analysis only the effect on the target of upstream variations need to be noted. Neutrals are recycled from the divertor plate into a thin layer in front of the target, where they are ionised and subsequently impact the target again. This cycle repeats indefinitely and so the only plasma flow in this model occurs in the thin layer adjacent to the target where the recycled neutrals are ionised.
+The simplest model of the divertor leg is the two-point model, which looks at the differences between the upstream, point one, and the target, point two. Given that the main aim of SOL modelling is to seek ways to reduce the extremely high fluxes at the upstream before they reach the target, for simple analysis only the effect on the target of upstream variations need to be noted. Neutrals are recycled from the divertor plate into a thin layer in front of the target, where they are ionised and subsequently impact the target again. This cycle repeats indefinitely and so the only plasma flow in this model occurs in the thin layer adjacent to the target where the recycled neutrals are ionised.
 
-b) has 3 equations containing 3 unknowns: \netg, \Ttg and \Tus, because \neus and $q_{\parallel}$ are independent variables in any tokamak, these equations are derived as steady-state versions of the previously shown fluid equations.
-
-
-- Pressure loss (1997Pitcher review of Experimental Divertor physics - p 45)
-
-- Heat Flow (Braginskii vs Free Streaming) - Flux Limiter
-"Braginskii" is mentioned on \textbf{p.399} of Stangeby
-a) Classical ion heat transport, $q_i$, is proportional to the temperature gradient in the SOL (all variables are parallel to the 1D simulation axis) and is known as the Braginskii heat flux relation \citep{Braginskii1965}. This model works well at low temperatures and when the mean free path is short compared to the system's scale lengths, or otherwise it assumes that particles undergo frequent collisions. However, when $\nabla T$ is very high, the scale length over which the temperature changes a large amount becomes fairly close to the size of the collisional mean free path. Consequently, the model over estimates the heat flux at high $\nabla T$ because some particles' collision lengths are very large, hence they travel most of the SOL unhindered.
-
-This means and infinite temperature gradient would produce infinitely fast heat conduction. Clearly this is not possible given that the plasma species, that are the carriers of the heat, have finite speeds. The thermal electron velocity sets the upper limit on heat transport, as heat cannot travel faster than the fastest particles. 
+b) has 3 equations containing 3 unknowns: \netg, \Ttg and \Tus, because \neus and $q_{\parallel}$ are independent variables in any tokamak, these equations are derived as steady-state versions of equations~\ref{eqDensity},\ref{eqMomentum} and \ref{eqPressure}.
 
 
--*********- Short literature review of other divertor simulations (do at end if I have time) 
-
->Detachment is loosely defined as when the target temperature falls below 5 eV \cite{Porter1996}, and the upstream temperature no longer dictates \Ttg. 
-
-> Attached plasmas are characterised by high target densities, ion current and target temperature. Beginning detachment initiates steep drops in \Ttg and \netarget and ion current to the divertor sheath (or target plate) \cite{Stacey2001}, as well as extensive parallel pressure loss from the target toward the upstream \cite{Nakazawa2000}.
-
->Linear plasma devices have been used to simulate divertor detachment \cite{Nishijima2002, Ohno2002}
-
-> We investigate Super-X divertor (SXD) geometry, as well as conventional divertor (CD) geometry, as it is thought that the extended SXD leg will allow more control over the extent of detachment \cite{Valanju2009}. Divertor geometry has been shown in simulation and experiment to have large effects on the extent of detachment over a variety of operating conditions \cite{Pitts2001}.
-
-> Many problems arise when attempting to control the stability of detachment in experiments \cite{Lipschultz2016}, which ideally aim to fix the low temperature and pressure detached region between the X-point and target, in order to prevent it impacting on core performance.
-
-> Detachment reduces the compression of impurities in the divertor region \cite{Bosch2001} so impurity transport during detachment requires further analysis.
 
 
 We first investigate how SOL1D, a one dimensional fluid equation code, deals with detachment and confirm that factors influencing detachment in experiment and other simulations have similar effects on the state of detachment. Following this, the underlying processes causing detachment are examined in an effort to better understand this phenomenon which is likely to prove vital for future high power tokamaks. Detachment stability is very susceptible to upstream variation and other external factors, for example upstream density and impurity fraction \cite{Lipschultz2016}, and needs better understanding before detachment can be successfully controlled throughout a range of operating scenarios in ITER and other future machines. 
@@ -235,7 +229,7 @@ Pressure loss saturation is not observed in the simulations shown in figure~\ref
 \begin{figure}
 \includegraphics[scale=0.7]{Figures/PlossAlcator.png}
 \centering
-\caption{Pressure loss ratio, $\frac{2P_{tg}}{P_{us}}$, against divertor plate temperature. Data from Alcator C-Mod \cite{Lipschultz2007}.}\label{figPlossAlcator}
+\caption{Pressure loss ratio, $\frac{2P_{tg}}{P_{us}}$, against divertor plate temperature. Data from Alcator C-Mod \cite{Lipschultz2007}. The $\rho $ values show the distance of the four different radial flux surfaces from the midplane.}\label{figPlossAlcator}
 \end{figure}
 
 SOL pressure is a combination of the static thermal pressure and the dynamic pressure, which is due to the motion of the ions. Pressure loss between the upstream and the target is caused by the friction between the plasma and the neutrals. In much of the SOL, the thermal velocity is greater than the ion velocity, so $P_{static}~\gg~P_{dynamic}$. However, at the sheath, ion velocity is equal to the sound speed, making the two pressures equal. As \neus increases, so does pressure loss, because a larger number of particles in the same volume leads to greater friction between the plasma and neutrals.
@@ -359,6 +353,8 @@ Figure~\ref{figCvarTR5nes} shows the temperature ratio, \Ttg/\Tus, and is suppor
 
 Higher upstream densities require lower impurity levels to bring \Ttg below the required temperature. Successful operation can be achieved at the different densities as follows. At the lowest density examined here, \noNe{1}, carbon percentage will need to be increased further, above 2\%, beyond the scope of this group of simulations. The danger in doing this is the transport of impurities into the core, which can lead to catastrophic Bremsstrahlung energy losses if uncontrolled. For \noNe{1.5}, an accelerating \Ttg decrease, falling threefold over the impurity fraction range, is accompanied by little reduction of \Tus. The window of acceptable carbon percentage shrinks as \neus increases, figure~\ref{figPRbar600} shows that power radiated by impurities quickly swamps all other loss terms as density is increased.
 
+
+
 \textbf{Extra detail on \neus = 2.0 case}
 > separate fig. of Tus and Ttg at different \%C 
 
@@ -366,7 +362,7 @@ Higher upstream densities require lower impurity levels to bring \Ttg below the 
 
 > Show extent of detachment that 0 to 2\% impurity brings
 
-We focused on one set of the impurity fraction data, that at \neus = \noNe{2}. Figures~\ref{figCvarTRne2} and \ref{figCvarPMne2} show the \Tus and \Ttg data for this case and the density profile peak position respectively. From pure hydrogenic plasma to 1.2\% impurity fraction, as the power radiated by impurities increases the target temperature falls steadily and drops below the 5 eV threshold for long term operation. The window from about 0.85\% to 1.2\% produces the desired \Ttg while retaining a sufficiently high \Tus so as not to hinder core plasma performance significantly. Within this window however, the density profile peak has remained attached to the divertor plate, as figure~\ref{figCvarPMne2} shows. Perhaps a divertor set up could be devised with a carefully controlled impurity population such that it can be held in a \textit{just} attached scenario. In this case the impurity fraction would radiate sufficient power to give an acceptable \Ttg, and progress of the detachment peak need not be closely controlled, as is the worry for the success of detachment in many machines, simply because the plasma in the divertor remains attached. However, after modelling and experimentally measuring impurity transport in the divertor region, strictly controlling the impurity population there may be an unrealistic goal.
+We focused on one set of the impurity fraction data, that at \neus = \noNe{2}. Figures~\ref{figCvarTRne2} and \ref{figCvarPMne2} show the \Tus and \Ttg data for this case and the density profile peak position respectively. From pure hydrogenic plasma to 1.2\% impurity fraction, as the power radiated by impurities increases the target temperature falls steadily and drops below the 5 eV threshold for long term operation. The window from about 0.85\% to 1.2\% produces the desired \Ttg while retaining a sufficiently high \Tus so as not to hinder core plasma performance significantly. Within this window however, the density profile peak has remained attached to the divertor plate, as figure~\ref{figCvarPMne2} shows. Perhaps a divertor set up could be devised with a carefully controlled impurity population such that it can be held in a \textit{just} attached scenario. In this case the impurity fraction would radiate sufficient power to give an acceptable \Ttg, and progress of the detachment peak need not be closely controlled, as is the worry for the success of detachment in many machines, simply because the plasma in the divertor remains attached. However, after modelling and experimentally measuring impurity transport in the divertor region, strictly controlling the impurity population there may be an unrealistic goal. It has been shown that detachment reduces the compression of impurities in the divertor region \cite{Bosch2001}, so impurity transport during detachment does require further analysis.
 
 Sudden detaching at impurity concentrations above 1.2\% cause a rapid drop in \Tus to such levels as could hinder core temperature. More study should be focused on this small region to better visualise and understand the effect on density peak position and upstream temperature as the plasma detaches from the plate.
 
@@ -389,7 +385,8 @@ Sudden detaching at impurity concentrations above 1.2\% cause a rapid drop in \T
 
 
 \section{Conclusion}\label{secConclusion}
-Successful operation of a tokamak relies on prolonged health of the divertor plates which must be obtained through mitigation of the continual bombardment by energetic plasma species. Sufficiently powerful machines will require automatic divertor heat flux reduction from the outset. The interrelations between the parameters which influence divertor temperature must be extensively understood to decide on the optimal configuration for operation. OPERATIONAL WINDOWS
+\textit{remember conclusion needs to be concise}
+\textbf{Revise/remove: Successful operation of a tokamak relies on prolonged health of the divertor plates which must be obtained through mitigation of the continual bombardment by energetic plasma species. Sufficiently powerful machines will require automatic divertor heat flux reduction from the outset.} The interrelations between the parameters which influence divertor temperature must be extensively understood to decide on the optimal configuration for operation. OPERATIONAL WINDOWS
 
 
 - Applicability of Detachment in areas other than fusion: Coronal Loops exhibiting detachment (need to flick through the 2 papers I have on this topic) 
