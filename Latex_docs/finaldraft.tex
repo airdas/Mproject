@@ -166,11 +166,11 @@ An important first step when running grid simulations is to ascertain an accepta
 	\begin{tabular}{c|c|c|c|c|c}
 		\multicolumn{1}{l|}{\multirow{2}{*}{}}   & \multicolumn{2}{l|}{Time taken to complete 1000 time steps}  & \multicolumn{2}{l|}{Value and percentage change of \netg} \\ \cline{2-5} 
 		Resolution          & \neus = $1.0$ & \neus = $1.25$  & \netg & \% change  \\ \hline
-		200                 &      0:47:44    \qquad   &    0:24:23        &  0.2540  &   -    \\
-		400                 &      1:48:55    \qquad   &    2:45:04        &  0.2674  &  5.0   \\
-		600                 &      7:40:57    \qquad   &    5:05:04        &  0.2718  &  1.6   \\
-		800                 &     13:18:55    \qquad   &    7:01:28        &  0.2734  &  0.6   \\
-	   1000                 &  \textgreater~30h \qquad &       N/A         &  0.2745  &  0.4
+		200                 &      0:47:44          &    0:24:23        &  0.2540  &   -    \\
+		400                 &      1:48:55          &    2:45:04        &  0.2674  &  5.0   \\
+		600                 &      7:40:57          &    5:05:04        &  0.2718  &  1.6   \\
+		800                 &     13:18:55          &    7:01:28        &  0.2734  &  0.6   \\
+	   1000                 &  \textgreater~30:0:0  &       -           &  0.2745  &  0.4
 	\end{tabular}
 \end{table}
 
@@ -311,6 +311,20 @@ Implementing this new geometry requires estimating how the magnetic field change
 \end{figure}
 
 The extended divertor leg in the SXD geometry enables simulations to settle down far quicker than in the CD set up, as the power input (at the midplane) is much farther removed from the complicated and delicately balanced interactions at the target.
+
+
+\subsubsection{Power Flux Input}\label{sssecPF}
+\large{\textbf{POWER FLUX INPUT VARIATION THOUGHTS}}
+\normalsize
+
+
+PF variation figure shows the successful disconnect SXDG achieves between the midplane and the divertor plates. 
+
+A 2.5 x increase in power flux input only causes noticeable \Ttg increase at very low set \neus values - more investigation is required but from these results it seems that at sufficiently high density there is no drawback to ramping up core power, and consequently power flux input to the SOL.
+
+Increasing \neus sees a steady decrease in \neus, but SXD geometry is such that detachment progresses steadily and the divertor plasma does not suddenly pull away from the target in a small \neus window.
+
+\textbf{could fit straight lines to \Tus's to see the effect on slope of changing PFI}
 
 
 \subsection{Neutral Loss}\label{ssecNloss}
