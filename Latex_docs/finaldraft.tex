@@ -59,6 +59,11 @@
 
 % for multirow command in table generation
 \usepackage{multirow}
+% make caption font small
+\usepackage[font={footnotesize}]{caption}
+
+% make things transparent (here want PRad fig a little transparent)
+\usepackage{transparent}
 
 % Document
 \begin{document}
@@ -83,7 +88,7 @@ Magnetic fusion devices, specifically tokamaks, produce large amounts of power w
 
 Heat fluxes entering the scrape-off layer (SOL) in current tokamaks are mitigated by several methods including neutral gas puffing and angular offsetting the divertor plates to spread the flux over a wider area. In ITER, the SOL heat flux will be far higher, around 1 GW m\pow{-2} \cite{Loarte2007}, undermining the capability of present cooling methods. This will expose the divertor plates to minimum flux of 10 MW m\pow{-2} during normal operation, with peak power fluxes during ELMs of twice that amount \cite{Loarte2007}; heat fluxes below 10 MW m\pow{-2} are required by current materials. This high power flux is unavoidable, as $ P_{SOL} \approx 100$ MW, the power entering the SOL, is fixed, and the SOL heat channel is estimated to be around 1 mm \cite{Eich2013}, and depends on factors innate to reactor design. Since these high heat fluxes entering the SOL cannot be changed, ways must be found to reduce them throughout the divertor region.
 
-Detachment is loosely defined as when the target temperature falls below 5 eV \cite{Porter1996}, and the upstream temperature no longer dictates \Ttg. Attached plasmas are characterised by high target densities, ion current and target temperature. Detachment initiates steep drops in \Ttg, \netarget and ion current to the divertor sheath (or target plate) \cite{Stacey2001}, as well as extensive parallel pressure loss from the target toward the upstream \cite{Nakazawa2000}. Many problems arise when attempting to control the stability of detachment in experiments \cite{Lipschultz2016}, which ideally aim to fix the low temperature and pressure detached region between the X-point and target, in order to prevent it impacting on core performance. More detailed understanding of the processes behind detachment is needed in order to decide how best to control its stability in current and future tokamaks \cite{Reimold2015}.
+Detachment is loosely defined as when the target temperature falls below 5 eV \cite{Porter1996}, and the upstream temperature no longer dictates \Ttg. Attached plasmas are characterised by high target densities, ion current and target temperature. Detachment initiates steep drops in \Ttg, \netarget and ion current to the divertor sheath (or target plate) \cite{Stacey2001}, as well as extensive parallel pressure loss from the target toward the upstream \cite{Nakazawa2000}. Many problems arise when attempting to control the stability of detachment in experiments \cite{Lipschultz2016}, which ideally aim to fix the low temperature and pressure detached region between the X-point and target, in order to prevent it impacting on core performance. More detailed understanding of the processes behind detachment is needed in order to decide how best to control its stability in current and future tokamaks \cite{Reimold2015}. A detached divertor regime was first achieved by gas fuelling, which acted as a sink for parallel plasma momentum through charge exchange collisions \cite{Loarte1998}, combined with sufficient volumetric recombination \cite{Wischmeier2009} enough ions and momentum is removed from the SOL plasma, cooling the region close to the target and initiating detachment.
 
 We investigate Super-X divertor (SXD) geometry, as well as conventional divertor (CD) geometry, as the extended SXD leg is thought to allow more control over the extent of detachment \cite{Valanju2009}. Divertor geometry has been shown in simulation and experiment to have large effects on the extent of detachment over a variety of operating conditions \cite{Pitts2001}. Linear plasma devices have been used to simulate divertor detachment \cite{Nishijima2002, Ohno2002}, as changes to tokamak divertors are costly both monetarily and in time.
 
@@ -158,14 +163,14 @@ An important first step when running grid simulations is to ascertain an accepta
 	\centering
 	\caption{SOL1D simulation run times, using 8 cores, and percentage change in \netg for different y-axis resolutions, ny.}
 	\label{tabsol1dres}
-	\begin{tabular}{l|l|l|l|l|l}
-		\multicolumn{1}{l|}{\multirow{2}{*}{}} & \multicolumn{3}{l}{Time taken to complete 1000 time steps}    \\ \cline{2-3} 
-		\multicolumn{1}{l|}{Resolution}        & \multicolumn{1}{l|}{\neus = $1.0$} & \multicolumn{1}{l|}{\neus = $1.25$}  & \netg & \% change  \\ \hline
-		200                 &      47m 44s          &    24m 23s         &  0.2540 &  -    \\
-		400                 &      1h 48m 55s       &    2h 45m 4s       &  0.2674 & 5.0   \\
-		600                 &      7h 40m 57s       &    5h 5m 4s        &  0.2718 & 1.6   \\
-		800                 &      13h 18m 55s      &    7h 1m 28s       &  0.2734 & 0.6  \\
-		1000                &   \textgreater~30h    &       N/A          &  0.2745 & 0.4
+	\begin{tabular}{c|c|c|c|c|c}
+		\multicolumn{1}{l|}{\multirow{2}{*}{}}   & \multicolumn{2}{l|}{Time taken to complete 1000 time steps}  & \multicolumn{2}{l|}{Value and percentage change of \netg} \\ \cline{2-5} 
+		Resolution          & \neus = $1.0$ & \neus = $1.25$  & \netg & \% change  \\ \hline
+		200                 &      0:47:44    \qquad   &    0:24:23        &  0.2540  &   -    \\
+		400                 &      1:48:55    \qquad   &    2:45:04        &  0.2674  &  5.0   \\
+		600                 &      7:40:57    \qquad   &    5:05:04        &  0.2718  &  1.6   \\
+		800                 &     13:18:55    \qquad   &    7:01:28        &  0.2734  &  0.6   \\
+	   1000                 &  \textgreater~30h \qquad &       N/A         &  0.2745  &  0.4
 	\end{tabular}
 \end{table}
 
@@ -253,9 +258,9 @@ SOL1D considers three types of radiated power: radiation due to impurities, Rzra
 \end{equation}
 
 \begin{figure}
-\includegraphics[scale=0.5]{Figures/sol1d/PRbar600.png}
+\transparent{0.75}\includegraphics[scale=0.5]{Figures/sol1d/PRbar600.png}
 \centering
-\caption{Different sources of radiated power at varying set upstream density in SOL1D, with ny = 600 cells. The horizontal line shows the upstream power flux input.}\label{figPRbar600}
+\transparent{1}\caption{Different sources of radiated power at varying set upstream density in SOL1D, with ny = 600 cells. The horizontal line shows the upstream power flux input.}\label{figPRbar600}
 \end{figure}
 
 Radiated power flux as a fraction of power flux input is expected to be lower at smaller values of \neus because system temperature is higher overall, and most plasma species are fully ionised. This is observed in figure~\ref{figPRbar600}, along with more power radiated as \neus increases and the system undergoes detachment, reducing the average temperature, a trend which can be seen in figure~\ref{figTT_IMPCOMBO2}. As the temperature falls, more species begin to recombine, especially the carbon impurities. This is why an increase in radiation due to impurities, Rzrad, is observed up to a density of \noNe{2.5}, because carbon can recombine at higher temperatures than the other plasma species, providing significant power loss via Bremsstrahlung and energy level transitions.
@@ -281,6 +286,10 @@ Plasma-neutral energy transfer through charge exchange shows some interesting ch
 \centering
 \caption{Spatial distribution of energy transfer via charge exchange in CD geometry. Solid lines represent energy being lost to the neutrals by the plasma, while dotted lines show regions where neutrals transfer energy to the plasma.}\label{figbalEcx19m}
 \end{figure}
+
+
+\textbf{MOMENTUM TRANSFER IN CHARGE EXCHANGE THOUGHTS}
+Fcx figure: area of negative Fcx (neutrals transfering momentum to plasma) moves toward upstream as detachment progresses. Perhaps fast neutrons making it past the detachment peak (as their interaction cross section is lower due to their higher velocity) then make it to a region where they have greater speed than the ions in that region (which are being continually accelerated from the moment they enter the upstream at v=0) and therefore transfer momentum TO the ions in that region. Lab book sketch depicts what happens. This reduces the hot ion flux to the target and allows the area close to the plates detach and cool further.
 
 
 
