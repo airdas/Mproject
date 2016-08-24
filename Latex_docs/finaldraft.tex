@@ -258,9 +258,9 @@ SOL1D considers three types of radiated power: radiation due to impurities, Rzra
 \end{equation}
 
 \begin{figure}
-\transparent{0.75}\includegraphics[scale=0.5]{Figures/sol1d/PRbar600.png}
+\includegraphics[scale=0.5]{Figures/sol1d/PRbar600ed.png}
 \centering
-\transparent{1}\caption{Different sources of radiated power at varying set upstream density in SOL1D, with ny = 600 cells. The horizontal line shows the upstream power flux input.}\label{figPRbar600}
+\caption{Different sources of radiated power at varying set upstream density in SOL1D, with ny = 600 cells. The horizontal line shows the upstream power flux input. Rzrad is power radiated by impurities, Riz is radiative loss from ionisation reactions and Rrec is energy radiated by recombination reactions.}\label{figPRbar600}
 \end{figure}
 
 Radiated power flux as a fraction of power flux input is expected to be lower at smaller values of \neus because system temperature is higher overall, and most plasma species are fully ionised. This is observed in figure~\ref{figPRbar600}, along with more power radiated as \neus increases and the system undergoes detachment, reducing the average temperature, a trend which can be seen in figure~\ref{figTT_IMPCOMBO2}. As the temperature falls, more species begin to recombine, especially the carbon impurities. This is why an increase in radiation due to impurities, Rzrad, is observed up to a density of \noNe{2.5}, because carbon can recombine at higher temperatures than the other plasma species, providing significant power loss via Bremsstrahlung and energy level transitions.
@@ -278,7 +278,7 @@ Neutrals recombining from the target and walls and entering the divertor leg tra
 \end{figure}
 
 
-\subsection{Energy Transfer}\label{ssecEtrans}
+\subsection{Charge Exchange}\label{ssecCX}
 Plasma-neutral energy transfer through charge exchange shows some interesting changes as the system detaches from the target plates. Pre-detachment, the plasma loses energy to the neutrals when hot ions pick up electrons from a colder neutrals, producing hot neutrals and cold ions. In the midst of detaching, the ions and neutrals alternate being hottest in distinct regions, from the target plate to 2 metres into the upstream, shown by the black curves in figure~\ref{figbalEcx19m} at \neus = \noNe{2.4}. Electron heat transport is rapid, so they are cooled fastest further away from the plates during detachment. When charge exchange occurs, the ion temperature, $T_i$, is effectively swapped for the neutral temperature, $T_n$. Ions and electrons are strongly coupled in SOL1D, $T_i = T_e$, therefore; the more cool electrons that permeate into the upstream, the more charge exchange reactions will be swapping cold $T_e$ for hotter $T_n$.
 
 \begin{figure}
@@ -287,58 +287,15 @@ Plasma-neutral energy transfer through charge exchange shows some interesting ch
 \caption{Spatial distribution of energy transfer via charge exchange in CD geometry. Solid lines represent energy being lost to the neutrals by the plasma, while dotted lines show regions where neutrals transfer energy to the plasma.}\label{figbalEcx19m}
 \end{figure}
 
+Momentum transfer to neutral gas was highlighted as a key process in achieving detachment in experiment \cite{Loarte1998, Wischmeier2009}. Figure~\ref{figbalFcx16m} shows momentum transfer between the plasma and neutrals via charge exchange in the region between the X-point and target. The spatial distribution of momentum transfer changes distinctly between attached (black) and detached (blue and red) divertor plasmas. When attached, the plasma only loses momentum to the neutrals, shown by solid lines. When detaching, an area of momentum gain by the plasma appears, the dotted lines, which moves upstream as detachment progresses.
 
-\textbf{MOMENTUM TRANSFER IN CHARGE EXCHANGE THOUGHTS}
-Fcx figure: area of negative Fcx (neutrals transfering momentum to plasma) moves toward upstream as detachment progresses. Perhaps fast neutrons making it past the detachment peak (as their interaction cross section is lower due to their higher velocity) then make it to a region where they have greater speed than the ions in that region (which are being continually accelerated from the moment they enter the upstream at v=0) and therefore transfer momentum TO the ions in that region. Lab book sketch depicts what happens. This reduces the hot ion flux to the target and allows the area close to the plates detach and cool further.
-
-
-
-\subsection{Super-X Geometry}\label{ssecSXG}
-Until now, the SOL1D simulations performed have used a standard divertor geometry and parameters (25m long field line and uniform B-field). Future simulations aim to emulate behaviour of MAST-Upgrade, which has just installed a Super-X divertor (SXD) in place of it's previous conventional divertor (CD); the differences between the two can be seen in figure~\ref{figCDvsSXD}. In the SXD geometry, the distance from the X-point to the target is much longer than the CD set up. Additionally, extra magnetic coils have been added into the nose of the bulkhead seen extending towards the X-point, which further separate the cold divertor plasma from the bulk plasma. These factors allow a greater tolerance when implementing conditions to achieve detachment, as changes in the divertor region are not transmitted as quickly or with the same magnitude as with the CD geometry.
+As the system cools while detachment occurs, ions will have less and less energy and parallel momentum. At some point, the faster neutrals moving toward the upstream will possess greater momentum than enough ions approaching the target to produce a net loss of momentum by the neutrals via charge exchange, and a net gain by the plasma. Perhaps these fast neutrals' interaction cross section is low enough for them to reach a region nearer the upstream where the ion speed, and therefore momentum, is less than the neutrals'. Ions are accelerated towards the target by the sheath potential the moment they enter the upstream, with zero parallel velocity. This would reduce the hot ion flux to the target and allow the plasma in the vicinity of the plates to detach and cool further.
 
 \begin{figure}
-\includegraphics[scale=0.5]{Figures/CDvsSXD.png}
+\includegraphics[scale=0.5]{Figures/sol1d/balFcx16m.png}
 \centering
-\caption{A comparison of the Super-X Divertor (SXD) and the Conventional Divertor (CD) geometries on MAST \cite{Havlickova2014}. The y-axis, z, is the height in metres and R is the major radius, in metres.}\label{figCDvsSXD}
+\caption{Spatial distribution of momentum transfer via charge exchange in CD geometry at three stages of detachment. Momentum lost to the neutrals by the plasma is shown by solid lines, while dotted lines show neutrals transfering momentum to the plasma.}\label{figbalFcx16m}
 \end{figure}
-
-Implementing this new geometry requires estimating how the magnetic field changes over the length of the field line. This is entered into the simulations by changing the Area Expansion Ratio (AER), which describes how the cross section of a flux tube changes as it traverses the length of the field line. A distance of $0.005$ m out from the separatrix into the SOL was used, thus by using the third panel in figure~\ref{figMASTUdesignpapersFig2} the AER is estimated to be 12. Furthermore, the connection length of the field line between the X-point and the target is estimated as $26$ m, from the second panel in figure~\ref{figMASTUdesignpapersFig2}. The connection length between the outboard midplane and the X-point is $5$ m \cite{Fishpool2013}, making the total length of the simulation y-axis $31$ m. The fourth panel in figure~\ref{figMASTUdesignpapersFig2} shows the distribution of connection length, for a field line 0.01 m into the separatrix, between the midplane and the target plates \cite{Fishpool2013}. The first pane in figure~\ref{figMASTUdesignpapersFig2} shows the divertor leg footprints for each configuration.
-
-\begin{figure}
-\includegraphics[scale=0.75]{Figures/MASTUdesignpapersFig2_2.png}
-\centering
-\caption{Representative magnetic equilibria with full toroidal field (0.8T vacuum at R=0.8m) showing conventional (black), expanded strike point (red) and Super-X like long connection length (blue) divertor geometries on MAST \cite{Fishpool2013}. Z is height, R is major radius, $ R_{sep} $ is the radius from the machine centre to a point in the separatrix, so $ R - R_{sep} $ is a distance from the plasma edge into the separatrix. The pink lines on panels 2 and 3 highlight our choice of connection length and area expansion for the SXD geometry.}\label{figMASTUdesignpapersFig2}
-\end{figure}
-
-The extended divertor leg in the SXD geometry enables simulations to settle down far quicker than in the CD set up, as the power input (at the midplane) is much farther removed from the complicated and delicately balanced interactions at the target.
-
-
-\subsubsection{Power Flux Input}\label{sssecPF}
-\large{\textbf{POWER FLUX INPUT VARIATION THOUGHTS}}
-\normalsize
-
-
-PF variation figure shows the successful disconnect SXDG achieves between the midplane and the divertor plates. 
-
-A 2.5 x increase in power flux input only causes noticeable \Ttg increase at very low set \neus values - more investigation is required but from these results it seems that at sufficiently high density there is no drawback to ramping up core power, and consequently power flux input to the SOL.
-
-Increasing \neus sees a steady decrease in \neus, but SXD geometry is such that detachment progresses steadily and the divertor plasma does not suddenly pull away from the target in a small \neus window.
-
-\textbf{could fit straight lines to \Tus's to see the effect on slope of changing PFI}
-
-
-\subsection{Neutral Loss}\label{ssecNloss}
-Rate of neutral loss, $nloss$, in the divertor leg can vary largely depending on their interaction mean free path, $\lambda_{mfp}$. If $\lambda_{mfp}$ becomes comparable to the width of the plasma channel in the leg then neutral lifetime in the plasma will become very short. We set neutral loss rate to $1\e{3}$ s\pow{-1} for all previous simulations. Increasing \neus initially increases $j_{sat~tg}$, as the ion flux to the target is higher. However, once detachment begins, ion density near the target starts to fall as the plasma density profile shifts away from the divertor plate. This leads to the roll-over region in the $j_{sat~tg}$ profile, as $j_{sat~tg} \approx nv_{i~tg}$, the plasma flux at the target.
-
-Using the super-X geometry, $nloss$ was varied between 1\e{3} and 1\e{5} s\pow{-1}. Saturation current density at the sheath, $j_{sat~tg}$, was plotted against upstream density at various values to provide the $j_{sat~tg}$ profiles shown in figure~\ref{fignloss1e345,52.5e425_2}. Increasing $nloss$ has a stark effect on the roll over region of the $j_{sat~tg}$ profile, it moves to higher density as $nloss$ increases. The initial $j_{sat~tg}$ gradient changes significantly with $nloss$. At loss rate $1\e{4}$ s\pow{-1} the gradient grows initially, then decreases when detachment starts and $j_{sat~tg}$ begins to fall. In contrast, the $j_{sat~tg}$ profile gradients for the higher $nloss$ runs are always decreasing even at low \neus. 
-
-\begin{figure}
-\includegraphics[scale=0.5]{Figures/sol1d/nloss1e345,525e425_2.png}
-\centering
-\caption{Saturation current density at the sheath, $j_{sat~tg}$ vs. upstream density, \neus, at different neutral lifetimes, nloss. Nloss has units of [s\pow{-1}]. SXD geometry was used for all simulations here.}\label{fignloss1e345,52.5e425_2}
-\end{figure}
-
-Several lower density simulations failed at all values of $nloss$, which is likely due to particles leaving the system too quickly for the density controller in the upstream to adjust. Once a lot of particles leave the system, because the power input stays the same, the overall temperature increases. Ion velocity into the sheath is set to the sound speed, and $v_S \propto \sqrt{T}$, so the rate of particles leaving the system into the sheath increases. This produces a vicious cycle as the temperature keeps increasing while more particles leave the system, and particles leave the plasma faster the higher the temperature. Further work could be done to try to stabilise the failed low density, high $nloss$ simulations in order to better understand the relationship between neutral loss rate and $j_{sat~tg}$ in the ramp up phase.
 
 
 
@@ -386,6 +343,54 @@ Sudden detaching at impurity concentrations above 1.2\% cause a rapid drop in \T
 	\centering
 	\caption{Distance of density peak to the X-point in metres at different impurity fractions, \neus = \noNe{2} in CD geometry.}\label{figCvarPMne2}
 \end{figure}
+
+
+
+\subsection{Super-X Geometry}\label{ssecSXG}
+Until now, the SOL1D simulations performed have used a standard divertor geometry and parameters (25m long field line and uniform B-field). Future simulations aim to emulate behaviour of MAST-Upgrade, which has just installed a Super-X divertor (SXD) in place of it's previous conventional divertor (CD); the differences between the two can be seen in figure~\ref{figCDvsSXD}. In the SXD geometry, the distance from the X-point to the target is much longer than the CD set up. Additionally, extra magnetic coils have been added into the nose of the bulkhead seen extending towards the X-point, which further separate the cold divertor plasma from the bulk plasma. These factors allow a greater tolerance when implementing conditions to achieve detachment, as changes in the divertor region are not transmitted as quickly or with the same magnitude as with the CD geometry.
+
+\begin{figure}
+\includegraphics[scale=0.5]{Figures/CDvsSXD.png}
+\centering
+\caption{A comparison of the Super-X Divertor (SXD) and the Conventional Divertor (CD) geometries on MAST \cite{Havlickova2014}. The y-axis, z, is the height in metres and R is the major radius, in metres.}\label{figCDvsSXD}
+\end{figure}
+
+Implementing this new geometry requires estimating how the magnetic field changes over the length of the field line. This is entered into the simulations by changing the Area Expansion Ratio (AER), which describes how the cross section of a flux tube changes as it traverses the length of the field line. A distance of $0.005$ m out from the separatrix into the SOL was used, thus by using the third panel in figure~\ref{figMASTUdesignpapersFig2} the AER is estimated to be 12. Furthermore, the connection length of the field line between the X-point and the target is estimated as $26$ m, from the second panel in figure~\ref{figMASTUdesignpapersFig2}. The connection length between the outboard midplane and the X-point is $5$ m \cite{Fishpool2013}, making the total length of the simulation y-axis $31$ m. The fourth panel in figure~\ref{figMASTUdesignpapersFig2} shows the distribution of connection length, for a field line 0.01 m into the separatrix, between the midplane and the target plates \cite{Fishpool2013}. The first pane in figure~\ref{figMASTUdesignpapersFig2} shows the divertor leg footprints for each configuration.
+
+\begin{figure}
+\includegraphics[scale=0.75]{Figures/MASTUdesignpapersFig2_2.png}
+\centering
+\caption{Representative magnetic equilibria with full toroidal field (0.8T vacuum at R=0.8m) showing conventional (black), expanded strike point (red) and Super-X like long connection length (blue) divertor geometries on MAST \cite{Fishpool2013}. Z is height, R is major radius, $ R_{sep} $ is the radius from the machine centre to a point in the separatrix, so $ R - R_{sep} $ is a distance from the plasma edge into the separatrix. The pink lines on panels 2 and 3 highlight our choice of connection length and area expansion for the SXD geometry.}\label{figMASTUdesignpapersFig2}
+\end{figure}
+
+The extended divertor leg in the SXD geometry enables simulations to settle down far quicker than in the CD set up, as the power input (at the midplane) is much farther removed from the complicated and delicately balanced interactions at the target.
+
+
+\subsubsection{Power Flux Input}\label{sssecPF}
+Upstream and target temperatures over a range of upstream densities in the SXD geometry are shown in figure~\ref{figSXDPFTT}. The inherent stability of this geometry compared to a CD is quite apparent as there is no sudden detachment window in which the upstream temperature rapidly drops, unlike in figure~\ref{figTT_IMPCOMBO2}. Instead, \Ttg quickly bottoms out and \Tus steadily decreases. Temperature is lower overall in a SXD compared to CD geometry due to the extra SOL volume in the divertor afforded by the additional 6 metres of connection length. 
+
+The success of the SXD is seen in figure~\ref{figSXDPFTT}, where a 2.5 increase in power flux input has minimal effect on \Ttg, except at very low upstream densities, while increasing \Tus by at least 10 eV over the whole range of \neus values. It seems that at sufficiently high density there is no drawback to increasing $P_{SOL}/A$, enabling core power to be increased, along with machine power output.
+
+\begin{figure}
+\includegraphics[scale=0.5]{Figures/sol1d/SXDPFTT.png}
+\centering
+\caption{Temperature comparison against set \neus in SXD geometry for power flux inputs 20 and 50 MW m\pow{-2}, shown by solid lines with circles and dashed lines with diamonds respectively. \Tus is denoted by red lines and \Ttg by black.}\label{figSXDPFTT}
+\end{figure}
+
+
+\subsection{Neutral Loss}\label{ssecNloss}
+Rate of neutral loss, $nloss$, in the divertor leg can vary largely depending on their interaction mean free path, $\lambda_{mfp}$. If $\lambda_{mfp}$ becomes comparable to the width of the plasma channel in the leg then neutral lifetime in the plasma will become very short. We set neutral loss rate to $1\e{3}$ s\pow{-1} for all previous simulations. Increasing \neus initially increases $j_{sat~tg}$, as the ion flux to the target is higher. However, once detachment begins, ion density near the target starts to fall as the plasma density profile shifts away from the divertor plate. This leads to the roll-over region in the $j_{sat~tg}$ profile, as $j_{sat~tg} \approx nv_{i~tg}$, the plasma flux at the target.
+
+Using the super-X geometry, $nloss$ was varied between 1\e{3} and 1\e{5} s\pow{-1}. Saturation current density at the sheath, $j_{sat~tg}$, was plotted against upstream density at various values to provide the $j_{sat~tg}$ profiles shown in figure~\ref{fignloss1e345,52.5e425_2}. Increasing $nloss$ has a stark effect on the roll over region of the $j_{sat~tg}$ profile, it moves to higher density as $nloss$ increases. The initial $j_{sat~tg}$ gradient changes significantly with $nloss$. At loss rate $1\e{4}$ s\pow{-1} the gradient grows initially, then decreases when detachment starts and $j_{sat~tg}$ begins to fall. In contrast, the $j_{sat~tg}$ profile gradients for the higher $nloss$ runs are always decreasing even at low \neus. 
+
+\begin{figure}
+\includegraphics[scale=0.5]{Figures/sol1d/nloss1e345,525e425_2.png}
+\centering
+\caption{Saturation current density at the sheath, $j_{sat~tg}$ vs. upstream density, \neus, at different inverse neutral lifetimes, nloss. Nloss has units of [s\pow{-1}]. SXD geometry was used for all simulations here.}\label{fignloss1e345,52.5e425_2}
+\end{figure}
+
+Several lower density simulations failed at all values of $nloss$, which is likely due to particles leaving the system too quickly for the density controller in the upstream to adjust. Once a lot of particles leave the system, because the power input stays the same, the overall temperature increases. Ion velocity into the sheath is set to the sound speed, and $v_S \propto \sqrt{T}$, so the rate of particles leaving the system into the sheath increases. This produces a vicious cycle as the temperature keeps increasing while more particles leave the system, and particles leave the plasma faster the higher the temperature. Further work could be done to try to stabilise the failed low density, high $nloss$ simulations in order to better understand the relationship between neutral loss rate and $j_{sat~tg}$ in the ramp up phase.
+
 
 
 
